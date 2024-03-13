@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:freelancerApp/features/freelancer/auth/views/login_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../Core/const/app_message.dart';
 
 
