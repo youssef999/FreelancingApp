@@ -123,7 +123,7 @@
 //                     onTap:(){
 //                       final box=GetStorage();
 //                       box.remove('email');
-//                       Get.offAll(const SplashView());
+//                       Get.toNamed(const SplashView());
 //                     },
 //                   ),
 //                   // const SizedBox(height: 16,),
@@ -152,7 +152,7 @@
 //                   //     final box = GetStorage();
 //                   //     box.remove('email');
 //                   //     box.remove('name');
-//                   //     // Get.offAll(const LoginView());
+//                   //     // Get.toNamed(const LoginView());
 //                   //   },
 //                   // )
 //                   //     : InkWell(

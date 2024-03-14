@@ -3,57 +3,53 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancerApp/features/freelancer/auth/views/login_view.dart';
+import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../../../../Core/const/app_message.dart';
+import '../../../Core/const/app_message.dart';
 
-
-class AuthController extends GetxController{
+class UsersController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController checkPassController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  bool loading=false;
+  bool loading = false;
 
   User? user = FirebaseAuth.instance.currentUser;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-   List<Map<String,dynamic>> categoryList=[];
-   List<Map<String,dynamic>> countryList=[];
-   final List<String> catNames = [];
-   final List<String> countryNames = [];
+  List<Map<String, dynamic>> categoryList = [];
+  List<Map<String, dynamic>> countryList = [];
+  final List<String> catNames = [];
+  final List<String> countryNames = [];
   String selectedItem = 'ترجمة';
   String selectedCountry = 'مصر';
 
-
-  changeCatValue(String value){
-    selectedItem=value;
-    update();
-  }
-  changeCountryValue(String value){
-    selectedCountry=value;
+  changeCatValue(String value) {
+    selectedItem = value;
     update();
   }
 
-  getAllCategories() async{
+  changeCountryValue(String value) {
+    selectedCountry = value;
+    update();
+  }
 
-  categoryList=[];
+  getAllCategories() async {
+    categoryList = [];
     QuerySnapshot querySnapshot =
-    await FirebaseFirestore.instance.collection
-      ('cat').get();
-    try{
-      List<Map<String, dynamic>> data
-      = querySnapshot.docs.map((DocumentSnapshot doc) =>
-      doc.data() as Map<String, dynamic>).toList();
+        await FirebaseFirestore.instance.collection('cat').get();
+    try {
+      List<Map<String, dynamic>> data = querySnapshot.docs
+          .map((DocumentSnapshot doc) => doc.data() as Map<String, dynamic>)
+          .toList();
 
-    categoryList=data;
+      categoryList = data;
 
-    for (int i=0;i<categoryList.length;i++){
-      catNames.add(categoryList[i]['name']);
-    }
-
-    }catch(e){
+      for (int i = 0; i < categoryList.length; i++) {
+        catNames.add(categoryList[i]['name']);
+      }
+    } catch (e) {
       // ignore: avoid_print
       print("E.......");
       // ignore: avoid_print
@@ -63,31 +59,27 @@ class AuthController extends GetxController{
       print("E.......");
     }
     update();
-
   }
 
-  getAllCountries() async{
-
+  getAllCountries() async {
     print("ccc");
 
-    countryList=[];
+    countryList = [];
     QuerySnapshot querySnapshot =
-    await FirebaseFirestore.instance.collection
-      ('countries').get();
-    try{
-      List<Map<String, dynamic>> data
-      = querySnapshot.docs.map((DocumentSnapshot doc) =>
-      doc.data() as Map<String, dynamic>).toList();
+        await FirebaseFirestore.instance.collection('countries').get();
+    try {
+      List<Map<String, dynamic>> data = querySnapshot.docs
+          .map((DocumentSnapshot doc) => doc.data() as Map<String, dynamic>)
+          .toList();
 
-      countryList=data;
+      countryList = data;
 
-      for (int i=0;i<countryList.length;i++){
+      for (int i = 0; i < countryList.length; i++) {
         countryNames.add(countryList[i]['name']);
       }
 
       print(countryNames);
-
-    }catch(e){
+    } catch (e) {
       // ignore: avoid_print
       print("E.......");
       // ignore: avoid_print
@@ -97,13 +89,11 @@ class AuthController extends GetxController{
       print("E.......");
     }
     update();
-
   }
 
-
-
-  addTokenToFirebase()async{
-    const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)*&1!';
+  addTokenToFirebase() async {
+    const String chars =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)*&1!';
     Random random = Random();
     String result = '';
 
@@ -111,21 +101,16 @@ class AuthController extends GetxController{
       result += chars[random.nextInt(chars.length)];
     }
 
-
     final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     await _firebaseMessaging.requestPermission();
 
     // Get the device token
     String? token = await _firebaseMessaging.getToken();
-    await FirebaseFirestore.instance.collection('tokens')
-        .doc(result)
-        .set({
-      'token':token!,
+    await FirebaseFirestore.instance.collection('tokens').doc(result).set({
+      'token': token!,
     }).then((value) {
       print("DONE ADD TOKEN");
-
     });
-
   }
 
   changePassword() async {
@@ -138,7 +123,8 @@ class AuthController extends GetxController{
         print(e);
       }
     } else {
-      appMessage(text: 'كلمة المرور غير متطابقة او عددها اقل من 6 ', fail: true);
+      appMessage(
+          text: 'كلمة المرور غير متطابقة او عددها اقل من 6 ', fail: true);
     }
   }
 
@@ -147,15 +133,13 @@ class AuthController extends GetxController{
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text)
           .then((value) {
-
         appMessage(text: "checkMail".tr, fail: true);
 
-        Get.offAll( const LoginView())!
+        Get.toNamed(Routes.LOGIN)!
             .then((value) => appMessage(text: "checkMail".tr, fail: false));
       });
       // Password reset email sent successfully
     } catch (e) {
-
       appMessage(text: 'ادخل بريد سليم ', fail: false);
       // Handle any errors that occur during the password reset process
       // ignore: avoid_print
@@ -164,38 +148,36 @@ class AuthController extends GetxController{
   }
 
   userLogin() async {
-    loading=true;
+    loading = true;
     update();
     final box = GetStorage();
     if (emailController.text.length > 2 && passController.text.length > 5) {
       try {
         await _auth
             .signInWithEmailAndPassword(
-            email: emailController.text, password: passController.text)
+                email: emailController.text, password: passController.text)
             .then((value) async {
-              print("DONE");
+          print("DONE");
 
           print("val$value");
-          loading=false;
+          loading = false;
           update();
           box.write('email', emailController.text);
-
         });
       } catch (e) {
-        loading=false;
+        loading = false;
         update();
         String error = '';
         print(e);
         if (e.toString().contains('The password is invalid')) {
           error = 'wrongPass'.tr;
-        } else if (e.toString().contains
-          ('There is no user record')) {
+        } else if (e.toString().contains('There is no user record')) {
           error = 'wrongMail'.tr;
         } else {
           error = 'Something Went Wrong Try Agian ';
         }
         //
-       // appMessage(text: error);
+        // appMessage(text: error);
       }
     } else {
       if (emailController.text.contains('@') == false) {
@@ -203,14 +185,13 @@ class AuthController extends GetxController{
       }
 
       if (passController.text.length < 5) {
-
         appMessage(text: 'wrongPass'.tr, fail: false);
       }
     }
   }
 
   userSignUp() async {
-    loading=true;
+    loading = true;
     update();
     final box = GetStorage();
     try {
@@ -220,7 +201,7 @@ class AuthController extends GetxController{
         password: passController.text,
       )
           .then((user) async {
-        loading=false;
+        loading = false;
         update();
         addTokenToFirebase();
         addNewFreelancer();
@@ -230,13 +211,13 @@ class AuthController extends GetxController{
     } catch (e) {
       print(e);
     }
-    loading=false;
+    loading = false;
     update();
   }
 
-
-  addNewFreelancer()async{
-    const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)*&1!';
+  addNewFreelancer() async {
+    const String chars =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)*&1!';
     Random random = Random();
     String result = '';
 
@@ -244,27 +225,26 @@ class AuthController extends GetxController{
       result += chars[random.nextInt(chars.length)];
     }
 
-    try{
-      await FirebaseFirestore.instance.collection('freelancers')
+    try {
+      await FirebaseFirestore.instance
+          .collection('freelancers')
           .doc(result)
           .set({
-        'name':nameController.text,
-        'email':emailController.text,
-        'id':result,
-        'cat':selectedItem,
-        'country':selectedCountry,
+        'name': nameController.text,
+        'email': emailController.text,
+        'id': result,
+        'cat': selectedItem,
+        'country': selectedCountry,
       }).then((value) {
         update();
         print("DONE");
-        appMessage(text: 'welcome'.tr,fail: false);
-       // Get.toNamed('/bottomBar');
+        appMessage(text: 'welcome'.tr, fail: false);
+        // Get.toNamed('/bottomBar');
       });
-    }catch(e){
+    } catch (e) {
       update();
       print(e);
-      appMessage(text: "error".tr,fail: true);
+      appMessage(text: "error".tr, fail: true);
     }
-
   }
-
 }

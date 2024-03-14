@@ -4,28 +4,18 @@ import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/Custom_Text.dart';
 import 'package:freelancerApp/core/widgets/Custom_button.dart';
 import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
+import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import '../../../../core/widgets/custom_textformfield.dart';
 import '../controllers/auth_controller.dart';
 import 'login_view.dart';
 
-class SignUpView extends StatefulWidget {
-  const SignUpView({Key? key}) : super(key: key);
+class SignUpView extends GetView<AuthController> {
+  const SignUpView({super.key});
 
-  @override
-  State<SignUpView> createState() => _SignUpViewState();
-}
 
-class _SignUpViewState extends State<SignUpView> {
 
-  final controller=Get.put(AuthController());
 
-  @override
-  void initState() {
-   controller.getAllCategories();
-   controller.getAllCountries();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +234,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ],
                 ),
                 onTap: () {
-                  Get.to( const LoginView());
+                  Get.to(Routes.LOGIN );
                 },
               ),
               const SizedBox(

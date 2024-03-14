@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_assets.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
-import 'package:freelancerApp/features/freelancer/auth/views/login_view.dart';
+import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../core/widgets/custom_app_bar.dart';
-
-
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -17,19 +15,16 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-
-  final box=GetStorage();
-
-  
+  final box = GetStorage();
 
   @override
   void initState() {
-    String email=box.read('email')??'x';
+    String email = box.read('email') ?? 'x';
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      if(email=='x'){
-     Get.offAll(const LoginView());
-      } else{
-  //  Get.offNamed('/CheckView');
+      if (email == 'x') {
+        Get.toNamed(Routes.HOME);
+      } else {
+        //  Get.offNamed('/CheckView');
       }
     });
     super.initState();
@@ -38,12 +33,13 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:AppColors.primary,
-      appBar:CustomAppBar('', false, 4),
+      backgroundColor: AppColors.primary,
+      appBar: CustomAppBar('', false, 4),
       body: SizedBox(
-       height:444,
-        child:Image.asset(AppAssets.logo,
-        fit: BoxFit.cover,
+        height: 444,
+        child: Image.asset(
+          AppAssets.logo,
+          fit: BoxFit.cover,
         ),
       ),
       // Stack(

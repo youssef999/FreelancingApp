@@ -4,22 +4,15 @@ import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/Custom_button.dart';
 import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
 import 'package:freelancerApp/core/widgets/custom_textformfield.dart';
-import 'package:freelancerApp/features/freelancer/auth/views/register_view.dart';
+import 'package:freelancerApp/features/auth/views/register_view.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/widgets/Custom_Text.dart';
-import '../controllers/auth_controller.dart';
+import '../../../core/widgets/Custom_Text.dart';
+import '../controllers/users_controller.dart';
 
-class LoginView extends StatefulWidget{
-  const LoginView({Key? key}) : super(key: key);
 
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-
-  AuthController controller= Get.put(AuthController());
+class UsersView extends GetView<UsersController> {
+  const UsersView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +73,7 @@ class _LoginViewState extends State<LoginView> {
                     color: AppColors.textColorDark,
                     controller: controller.passController),
               ),
-              GetBuilder<AuthController>(
+              GetBuilder<UsersController>(
                   builder: (_) {
                     return Column(
                       children: [
@@ -161,7 +154,7 @@ class _LoginViewState extends State<LoginView> {
                   ],
                 ),
                 onTap: () {
-                Get.to(const SignUpView());
+                Get.to( SignUpView());
                 },
               ),
               const SizedBox(
