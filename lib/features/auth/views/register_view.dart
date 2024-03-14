@@ -20,7 +20,6 @@ class SignUpView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:CustomAppBar('signup'.tr,true,50),
       backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Padding(

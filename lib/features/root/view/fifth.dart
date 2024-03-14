@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
 
 class FifthScreen extends StatelessWidget {
   const FifthScreen({super.key});
@@ -6,8 +7,10 @@ class FifthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: Container(child: Text('Fifth'),),
+      appBar: CustomAppBar('Fifth',context),
+      body: Container(
+        child: Text('Fifth'),
+      ),
     );
   }
 }

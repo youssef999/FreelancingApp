@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/localization/localization_controller.dart';
 import 'package:get/get.dart';
+
 import '../resources/app_colors.dart';
 import '../widgets/Custom_button.dart';
 import '../widgets/custom_app_bar.dart';
@@ -11,7 +12,7 @@ class LocalView extends GetWidget<LocaleController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar('changeLang'.tr, true, 50),
+      appBar: CustomAppBar('changeLang'.tr, context),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

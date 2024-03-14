@@ -18,7 +18,6 @@ class LoginView extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:AppColors.backgroundColor,
-      appBar:CustomAppBar('', false, 12),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(0.0),

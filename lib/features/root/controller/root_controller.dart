@@ -9,7 +9,7 @@ class RootController extends GetxController {
   RxInt selectedIndex = 0.obs;
   List page = [
      HomeView(),
-    const SecondScreen(),
+     SecondScreen(),
     const ThirdScreen(),
     const ForthScreen(),
     const FifthScreen()

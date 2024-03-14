@@ -3,6 +3,8 @@ import 'package:freelancerApp/features/auth/views/login_view.dart';
 import 'package:freelancerApp/features/auth/views/register_view.dart';
 import 'package:freelancerApp/features/home/binding/home_binding.dart';
 import 'package:freelancerApp/features/home/views/home_view.dart';
+import 'package:freelancerApp/features/profile/binding/profile_binding.dart';
+import 'package:freelancerApp/features/profile/view/profile.dart';
 import 'package:freelancerApp/features/root/binding/root_binding.dart';
 import 'package:freelancerApp/features/root/view/root_view.dart';
 import 'package:freelancerApp/features/splash/splash_view.dart';
@@ -17,7 +19,8 @@ class Theme1AppPages {
   static final routes = [
     GetPage(name: Routes.SPLASH, page: () => const SplashView()),
     GetPage(name: Routes.HOME, page: () => HomeView(), binding: HomeBinding()),
-    GetPage(name: Routes.ROOT, page: () => RootView(), binding: RootBinding()),
+    GetPage(name: Routes.ROOT, page: () => RootView(), binding: RootBinding()),    GetPage(name: Routes.PROFILE, page: () => ProfileView(), binding: ProfileBinding()),
+
     GetPage(
         name: Routes.LOGIN,
         page: () => const LoginView(),

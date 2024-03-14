@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
 
 class ThirdScreen extends StatelessWidget {
   const ThirdScreen({super.key});
@@ -6,8 +7,10 @@ class ThirdScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: Container(child: Text('Third'),),
+      appBar: CustomAppBar('Third',context),
+      body: Container(
+        child: Text('Third'),
+      ),
     );
   }
 }

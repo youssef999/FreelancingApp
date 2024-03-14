@@ -23,7 +23,7 @@ class _SplashViewState extends State<SplashView> {
       if (email == 'x') {
         Get.toNamed(Routes.ROOT);
       } else {
-        //  Get.offNamed('/CheckView');
+        Get.toNamed(Routes.ROOT);
       }
     });
     super.initState();
@@ -33,7 +33,6 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primary,
-      appBar: CustomAppBar('', false, 4),
       body: SizedBox(
         height: 444,
         child: Image.asset(
