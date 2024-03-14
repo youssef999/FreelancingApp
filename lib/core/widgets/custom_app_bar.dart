@@ -8,6 +8,7 @@ import 'Custom_Text.dart';
 
 PreferredSizeWidget CustomAppBar(String text, bool leading, double height) {
   return AppBar(
+    
       toolbarHeight: height,
       elevation: 0.2,
       title: Text(
@@ -23,7 +24,8 @@ PreferredSizeWidget CustomAppBar(String text, bool leading, double height) {
                 Icons.arrow_back_ios,
                 size: 28,
                 color: AppColors.iconColor,
-              ))
+              )
+              )
           : const SizedBox());
 }
 

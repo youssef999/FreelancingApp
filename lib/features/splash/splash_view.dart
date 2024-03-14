@@ -16,13 +16,12 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   final box = GetStorage();
-
   @override
   void initState() {
     String email = box.read('email') ?? 'x';
     Future.delayed(const Duration(seconds: 3)).then((value) {
       if (email == 'x') {
-        Get.toNamed(Routes.HOME);
+        Get.toNamed(Routes.ROOT);
       } else {
         //  Get.offNamed('/CheckView');
       }

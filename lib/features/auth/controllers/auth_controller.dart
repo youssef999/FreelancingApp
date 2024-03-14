@@ -187,8 +187,7 @@ class AuthController extends GetxController {
         } else {
           error = 'Something Went Wrong Try Agian ';
         }
-        //
-        // appMessage(text: error);
+
       }
     } else {
       if (emailController.text.contains('@') == false) {
