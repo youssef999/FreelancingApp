@@ -18,7 +18,7 @@ class UsersView extends GetView<UsersController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:AppColors.backgroundColor,
-     appBar: CustomAppBar('Users',context),
+     appBar: CustomAppBar('Users',context,true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(0.0),

@@ -7,7 +7,7 @@ class FifthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar('Fifth',context),
+      appBar: CustomAppBar('Fifth',context,true),
       body: Container(
         child: Text('Fifth'),
       ),

@@ -7,7 +7,7 @@ class ThirdScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar('Third',context),
+      appBar: CustomAppBar('Third',context,true),
       body: Container(
         child: Text('Third'),
       ),

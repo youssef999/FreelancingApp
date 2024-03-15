@@ -47,7 +47,7 @@ class AdvWidget extends StatelessWidget {
                     slideTransform: const DepthTransform(),
                     slideIndicator: CircularSlideIndicator(
                       padding: const EdgeInsets.only(bottom: 15),
-                      currentIndicatorColor: Color.fromARGB(255, 207, 207, 207),
+                      currentIndicatorColor: const Color.fromARGB(255, 207, 207, 207),
                       indicatorBackgroundColor: AppColors.whiteColor,
                     ),
                     itemCount: controller.sliderImagesList.length,

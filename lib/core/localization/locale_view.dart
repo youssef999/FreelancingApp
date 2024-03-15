@@ -12,7 +12,7 @@ class LocalView extends GetWidget<LocaleController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar('changeLang'.tr, context),
+      appBar: CustomAppBar('changeLang'.tr, context, true),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

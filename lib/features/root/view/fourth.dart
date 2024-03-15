@@ -7,7 +7,7 @@ class ForthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-appBar: CustomAppBar('Forth',context),
+appBar: CustomAppBar('Forth',context,true),
       body: Text('Forth'),
     );
   }

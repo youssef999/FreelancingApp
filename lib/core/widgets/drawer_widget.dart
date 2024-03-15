@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
+import 'package:freelancerApp/core/widgets/custom_image_widget.dart';
+import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -22,7 +24,13 @@ class CustomDrawer extends StatelessWidget {
         backgroundColor: AppColors.secondaryLightColor,
         child: ListView(
           children: [
-            _backIcon(),
+            _userImgWidget(context),
+            _userTextwidget(context),
+            const Divider(
+              color: AppColors.whiteColor,
+              endIndent: 5,
+              indent: 5,
+            ),
             _drawerWidget(context),
           ],
         ),
@@ -30,27 +38,184 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 
-  _drawerWidget(BuildContext context) {
-    return const  Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [],
+  _userImgWidget(BuildContext context) {
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.only(
+          top: 24 * 1,
+          bottom: 24,
+        ),
+        height: 12 * 8.3,
+        width: 10 * 11.5,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10 * 1.5),
+          color: AppColors.primaryBGLightColor,
+          border: Border.all(color: AppColors.primaryBGLightColor, width: 5),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: FadeInImage(
+            height: double.infinity,
+            width: double.infinity,
+            fit: BoxFit.cover,
+            image: const NetworkImage(
+              '',
+            ),
+            placeholder: const AssetImage(
+              'assets/images/user.png',
+            ),
+            imageErrorBuilder: (context, error, stackTrace) {
+              return Image.asset(
+                'assets/images/user.png',
+                height: double.infinity,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 
-  _backIcon() {
-    return GestureDetector(
-      onTap: () {
-        Get.close(1);
-      },
-      child: const Padding(
-        padding: EdgeInsets.only(top: 24 * 0.4, left: 24 * 0.6),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Icon(
-            Iconsax.arrow_left,
-            color: AppColors.primaryLightTextColor,
+  _userTextwidget(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: [
+          Text(
+            'Username',
+            textAlign: TextAlign.start,
+            style: GoogleFonts.cairo(
+              fontSize: 17,
+              color: AppColors.whiteColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          Text(
+            'Email@gmail.com',
+            textAlign: TextAlign.start,
+            style: GoogleFonts.cairo(
+              fontSize: 17,
+              color: AppColors.whiteColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          )
+        ],
+      ),
+    );
+  }
+
+  _drawerWidget(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _drawerTileWidget(
+          icon: 'assets/icon/kyc_verification.svg',
+          title: 'المستخدمين',
+          onTap: () {},
+        ),
+        _drawerTileWidget(
+          icon: 'assets/icon/transactions_log.svg',
+          title: 'المطورين',
+          onTap: () {},
+        ),
+        _drawerTileWidget(
+          icon: 'assets/icon/change_password.svg',
+          title: 'اعدادات',
+          onTap: () {},
+        ),
+        _drawerTileWidget(
+          icon: 'assets/icon/help_center.svg',
+          title: 'مساعدة',
+          onTap: () {},
+        ),
+        _drawerTileWidget(
+          icon: 'assets/icon/privacy_policy.svg',
+          title: 'سياسة الخصوصية',
+          onTap: () {},
+        ),
+        const Divider(
+          color: AppColors.whiteColor,
+          endIndent: 50,
+          indent: 50,
+        ),
+        _drawerTileWidget(
+          icon: 'assets/icon/about_us.svg',
+          title: 'اعرف عنا',
+          onTap: () {},
+        ),
+        _drawerTileWidget(
+          icon: 'assets/icon/sign_out.svg',
+          title: 'تسجيل الخروج',
+          color: Colors.red,
+          onTap: () {
+            Get.toNamed(Routes.REGISTER);
+          },
+        )
+      ],
+    );
+  }
+
+  _drawerTileWidget(
+      {required VoidCallback onTap,
+      required String title,
+      required String icon,
+      Color? color}) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15 * 1,
+          vertical: 50 * 0.2,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              height: 12 * 2.5,
+              width: 10 * 3.3,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10 * 0.7),
+                color: AppColors.whiteColor.withOpacity(0.2),
+              ),
+              child: Container(
+                padding: const EdgeInsets.all(10 * 0.2),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      10 * 0.7,
+                    ),
+                    color: AppColors.primaryBGLightColor),
+                child: CustomImageWidget(
+                  path: icon,
+                  height: 12 * 2,
+                  width: 10 * 2.2,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: Text(
+                title,
+                textAlign: TextAlign.start,
+                style: GoogleFonts.cairo(
+                  fontSize: 15,
+                  color: color ?? AppColors.whiteColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ))
+          ],
         ),
       ),
     );

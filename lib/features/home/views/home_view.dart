@@ -16,7 +16,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.mainly,
-      appBar: CustomAppBar('Home', context),
+      appBar: CustomAppBar('Home', context,true),
       key: scaffoldKey,
       body: SingleChildScrollView(
         child: Padding(
@@ -53,7 +53,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
               ),
-              SizedBox(
+             const SizedBox(
                 height: 20,
               ),
               Text(

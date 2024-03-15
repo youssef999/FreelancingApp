@@ -8,7 +8,7 @@ class SecondScreen extends GetView<RootController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-appBar: CustomAppBar('Second',context),
+appBar: CustomAppBar('Second',context,true),
       body: Container(child: Text('Secound'),),
     );
   }
