@@ -2,28 +2,28 @@
 
 import 'package:flutter/material.dart';
 
-
 class AppColors {
-  
+  static Color mainly = const Color.fromARGB(255, 240, 240, 240);
+
   static Color primary = const Color(0xff041CB4);
   static Color cardColor = Colors.white;
   static Color cardColor2 = Colors.white;
-  static Color backgroundColor=Colors.white;
-  static Color appBarColor=const Color(0xff041CB4);
-  static Color iconColor=  AppColors.primary;
-  static Color lightColor=  Colors.white;
-  static Color darkColor=  Colors.black;
-  static Color greyColor=  Colors.grey;
+  static Color backgroundColor = Colors.white;
+  static Color appBarColor = const Color(0xff041CB4);
+  static Color iconColor = AppColors.primary;
+  static Color lightColor = Colors.white;
+  static Color darkColor = Colors.black;
+  static Color greyColor = Colors.grey;
   static const Color primaryLightColor = Color(0xFF635BFE);
-  static Color buttonColor=  const Color(0xff003e6c);
-  static Color buttonColor2= Colors.white;
+  static Color buttonColor = const Color(0xff003e6c);
+  static Color buttonColor2 = Colors.white;
 
-  static Color textColorLight=  Colors.white;
-  static Color textColorGreyMode=  Colors.grey[100]!;
-  static Color textColorDark=  Colors.black;
+  static Color textColorLight = Colors.white;
+  static Color textColorGreyMode = Colors.grey[100]!;
+  static Color textColorDark = Colors.black;
 
-  static Color success=  Colors.green;
-  static Color failed=  Colors.red;
+  static Color success = Colors.green;
+  static Color failed = Colors.red;
 
   static const Color primaryDarkColor = Color(0xFF8358FF);
   static const Color secondaryDarkColor = Color(0xFF0D102F);
@@ -57,9 +57,9 @@ class AppColors {
 //     final box=GetStorage();
 //     String isDark=box.read('darkMode')??'light';
 
-//     if(darkTh=='x'|| darkTh=='light' || isDark=='light') {  
+//     if(darkTh=='x'|| darkTh=='light' || isDark=='light') {
 //       // ignore: avoid_print
-//       print("LIGHT");  
+//       print("LIGHT");
 
 // primary =  const Color(0xff041CB4);
 //  itemBackColor = Colors.grey[400]!;
@@ -82,10 +82,9 @@ class AppColors {
 
 //  update();
 // }
-         
-         
-//          else 
-         
+
+//          else
+
 //          {
 
 //           print("DARKKK");
@@ -107,7 +106,7 @@ class AppColors {
 //     Color success=  Colors.green;
 //   Color failed=  Colors.red;
 // update();
-       
+
 //          }
 //     }
 }
