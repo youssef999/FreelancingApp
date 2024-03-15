@@ -13,7 +13,7 @@ class AppColors {
   static Color iconColor = AppColors.primary;
   static Color lightColor = Colors.white;
   static Color darkColor = Colors.black;
-  static Color greyColor = Colors.grey;
+  static Color greyColor = const Color.fromARGB(255, 211, 211, 211);
   static const Color primaryLightColor = Color(0xFF635BFE);
   static Color buttonColor = const Color(0xff003e6c);
   static Color buttonColor2 = Colors.white;

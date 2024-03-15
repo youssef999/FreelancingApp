@@ -1,169 +1,208 @@
-
-import 'package:freelancerApp/core/resources/app_assets.dart';
-import 'package:freelancerApp/core/resources/app_colors.dart';
-import 'package:freelancerApp/core/widgets/Custom_button.dart';
-import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
-import 'package:freelancerApp/core/widgets/custom_textformfield.dart';
-import 'package:freelancerApp/features/auth/views/register_view.dart';
+import 'package:flutter/material.dart';
+import 'package:freelancerApp/features/auth/controllers/auth_controller.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
-import '../../../../core/widgets/Custom_Text.dart';
-import '../controllers/auth_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../core/resources/app_colors.dart';
 
 class LoginView extends GetView<AuthController> {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // var email, pass;
     return Scaffold(
-      backgroundColor:AppColors.backgroundColor,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: Column(
+      backgroundColor: AppColors.mainly,
+      appBar: null,
+      body: Form(
+        child: Center(
+          child: ListView(
             children: [
-              const SizedBox(height: 8,),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration:BoxDecoration(
-                      borderRadius:BorderRadius.circular(21),
-                      color:AppColors.lightColor
-                  ),
-                  height: 210,
-                  width:MediaQuery.of(context).size.width,
-                  child:Image.asset(AppAssets.logo,
-                    //    fit:BoxFit.fill,
-                  ),
-                ),
+              const SizedBox(
+                height: 100,
               ),
-              const SizedBox(height: 5,),
-              Padding(
-                padding: const EdgeInsets.all(7.0),
-                child: Custom_Text(text: 'sign'.tr,
-                  color:AppColors.greyColor,
-                  fontSize: 15,fontWeight:FontWeight.w500,
-                ),
+              Column(children: [
+                Text('FREELANCING',
+                    style: GoogleFonts.cairo(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.secondaryLightColor,
+                    )),
+                const Text('تسجيل الدخول',
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: AppColors.primaryDarkColor,
+                        fontFamily: 'Hind'))
+              ]),
+              const SizedBox(
+                height: 50,
               ),
-              const SizedBox(height: 9),
-              Padding(
-                padding: const EdgeInsets.only(top:3.0,left:22,right:22),
-                child: SizedBox(
-                  height:82,
-                  child: CustomTextFormField(
-                    hint: 'email'.tr,
-                    obx: false,
-                    type: TextInputType.emailAddress,
-                    obs: false,
-                    color: AppColors.textColorDark,
-                    controller: controller.emailController,),
-                ),
-              ),
-
-
-              Padding(
-                padding: const EdgeInsets.only(top:18.0,left:22,right:22),
-                child: CustomTextFormField(
-                    hint: 'password'.tr,
-                    obx: true,
-                    type: TextInputType.visiblePassword,
-                    obs: true,
-                    color: AppColors.textColorDark,
-                    controller: controller.passController),
-              ),
-              GetBuilder<AuthController>(
-                  builder: (_) {
-                    return Column(
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
+                    color: AppColors.primaryDarkColor,
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: controller.emailController,
+                      onSaved: (value) {
+                        controller.emailController.text = value!;
+                      },
+                      validator: (value) {
+                        if (value!.length > 100) {
+                          return 'Email Cant Be Larger Than 100 Letter';
+                        }
+                        if (value.length < 4) {
+                          return 'Email Cant Be Smaller Than 4 Letter';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          prefixIcon: Icon(
+                            Icons.account_circle_outlined,
+                            color: AppColors.darkColor,
+                          ),
+                          hintText: 'Email',
+                          hintStyle: TextStyle(color: Colors.black),
+                          labelStyle: TextStyle(color: Colors.black),
+                          labelText: 'Email'),
+                      cursorColor: AppColors.darkColor,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: controller.passController,
+                      onSaved: (value) {
+                        controller.passController.text = value!;
+                      },
+                      validator: (value) {
+                        if (value!.length > 100) {
+                          return 'PassWord Cant Be Larger Than 100 Letter';
+                        }
+                        if (value.length < 4) {
+                          return 'Password Cant Be Smaller Than 4 Letter';
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          prefixIcon: Icon(
+                            Icons.admin_panel_settings_sharp,
+                            color: AppColors.darkColor,
+                          ),
+                          hintText: 'Password',
+                          hintStyle: TextStyle(color: Colors.black),
+                          labelStyle: TextStyle(color: Colors.black),
+                          labelText: 'Password',
+                          focusColor: AppColors.whiteColor),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          elevation: 7,
+                          fixedSize: const Size(300, 60),
+                          shadowColor: AppColors.darkColor,
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 0.1, color: AppColors.darkColor),
+                              borderRadius: BorderRadius.circular(10)),
+                          backgroundColor: AppColors.whiteColor),
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                          color: AppColors.primaryDarkColor,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      onPressed: () {
+                        controller.userLogin();
+                      },
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         const SizedBox(
-                          height: 11,
+                          width: 200,
                         ),
-                        (controller.loading=true)?
-                        CustomButton(
-                            text: 'login'.tr,
+                        TextButton(
                             onPressed: () {
-                              controller.userLogin();
+                              print("heeee");
                             },
-                            color1: AppColors.buttonColor,
-                            color2: AppColors.buttonColor2):const Center(
-                          child:CircularProgressIndicator(),
+                            child: Text(
+                              'Forgot\n Password ?',
+                              style: TextStyle(color: AppColors.darkColor),
+                            )),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                        child: Text(
+                      'or',
+                      style:
+                          TextStyle(color: AppColors.darkColor, fontSize: 20),
+                    )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account ?",
+                          style: TextStyle(
+                              fontSize: 15, color: AppColors.darkColor),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.REGISTER);
+                          },
+                          child: const Expanded(
+                            child: Text(
+                              'Register',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  color: AppColors.secondaryLightColor),
+                            ),
+                          ),
                         )
                       ],
-                    );
-                  }
-              ),
-
-
-              const SizedBox(
-                height: 16,
-              ),
-
-              InkWell(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Custom_Text(
-                        text: 'forgotPassword'.tr,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        alignment: Alignment.center,
-                        color: Colors.black
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Custom_Text(
-                      text: 'reset'.tr,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      alignment: Alignment.center,
-                      color: Colors.grey,
-                    ),
+                    )
                   ],
                 ),
-                onTap: () {
-                 // Get.to(const ForgotPassView());
-                },
               ),
-              const SizedBox(
-                height: 17,
-              ),
-              InkWell(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Custom_Text(
-                      text: 'dontHaveAccount'.tr,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      alignment: Alignment.center,
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Custom_Text(
-                      text: 'signup'.tr,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      alignment: Alignment.center,
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-                onTap: () {
-                Get.to( Routes.REGISTER);
-                },
-              ),
-              const SizedBox(
-                height: 19,
-              ),
-
-              const SizedBox(
-                height: 19,
-              ),
-
             ],
           ),
         ),

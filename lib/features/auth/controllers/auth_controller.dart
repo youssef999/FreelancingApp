@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancerApp/features/home/views/home_view.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -158,7 +157,7 @@ class AuthController extends GetxController {
   }
 
   userLogin() async {
-    Get.to(HomeView());
+    Get.offAllNamed(Routes.ROOT);
     loading = true;
     update();
     final box = GetStorage();
@@ -187,7 +186,6 @@ class AuthController extends GetxController {
         } else {
           error = 'Something Went Wrong Try Agian ';
         }
-
       }
     } else {
       if (emailController.text.contains('@') == false) {

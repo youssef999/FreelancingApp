@@ -154,7 +154,7 @@ class CustomDrawer extends StatelessWidget {
           title: 'تسجيل الخروج',
           color: Colors.red,
           onTap: () {
-            Get.toNamed(Routes.REGISTER);
+            Get.toNamed(Routes.LOGIN);
           },
         )
       ],

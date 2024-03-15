@@ -1,245 +1,345 @@
 import 'package:flutter/material.dart';
-import 'package:freelancerApp/core/resources/app_assets.dart';
-import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/Custom_Text.dart';
-import 'package:freelancerApp/core/widgets/Custom_button.dart';
-import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
-import 'package:freelancerApp/routes/app_routes.dart';
+import 'package:freelancerApp/features/auth/controllers/auth_controller.dart';
 import 'package:get/get.dart';
-import '../../../../core/widgets/custom_textformfield.dart';
-import '../controllers/auth_controller.dart';
-import 'login_view.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../core/resources/app_colors.dart';
 
 class SignUpView extends GetView<AuthController> {
   const SignUpView({super.key});
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
+    // var email, pass;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
+      backgroundColor: AppColors.mainly,
+      appBar: null,
+      body: Form(
+        child: Center(
+          child: ListView(
             children: [
-              Container(
-                decoration:BoxDecoration(
-                    borderRadius:BorderRadius.circular(21),
-                    color:AppColors.lightColor
-                ),
-                height: 180,
-                width:MediaQuery.of(context).size.width,
-                child:Image.asset(AppAssets.logo,
-                  //   fit:BoxFit.cover,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top:3.0,left:18,right:18),
-                child: SizedBox(
-                  height:82,
-                  child: CustomTextFormField(
-                    hint: 'email'.tr,
-                    obx: false,
-                    type: TextInputType.emailAddress,
-                    obs: false,
-                    color: AppColors.textColorDark,
-                    controller: controller.emailController,),
-                ),
-              ),
               const SizedBox(
-                height: 5,
+                height: 100,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top:3.0,left:18,right:18),
-                child: SizedBox(
-                  height:82,
-                  child: CustomTextFormField(
-                    hint: 'name'.tr,
-                    obx: false,
-                    type: TextInputType.name,
-                    obs: false,
-                    color: AppColors.textColorDark,
-                    controller: controller.nameController,),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(top:3.0,left:18,right:18),
-                child: GetBuilder<AuthController>(
-                  builder: (_) {
-                    return Column(
-                      children: [
-                        Row(
-                          children: [
-                            Custom_Text(text: 'selectCat'.tr,
-                            fontSize: 16,color:AppColors.textColorDark,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6,),
-                        Container(
-                          width:MediaQuery.of(context).size.width*0.83,
-                          decoration:BoxDecoration(
-                            borderRadius:BorderRadius.circular(13),
-                            color:Colors.grey[100]!
-                          ),
-                          child: DropdownButton<String>(
-                            value:controller.selectedItem,
-                            onChanged: (String? newValue) {
-                              if (newValue != null) {
-                                controller.changeCatValue(newValue);
-                              }
-                            },
-                            items: controller.catNames.map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(value),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    );
-                  }
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top:3.0,left:18,right:18),
-                child: GetBuilder<AuthController>(
-                    builder: (_) {
-                      return Column(
-                        children: [
-                          Row(
-                            children: [
-                              Custom_Text(text: 'selectCountry'.tr,
-                                fontSize: 16,color:AppColors.textColorDark,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 6,),
-                          Container(
-                            width:MediaQuery.of(context).size.width*0.83,
-                            decoration:BoxDecoration(
-                                borderRadius:BorderRadius.circular(13),
-                                color:Colors.grey[100]!
-                            ),
-                            child: DropdownButton<String>(
-                              value:controller.selectedCountry,
-                              onChanged: (String? newValue) {
-                                if (newValue != null) {
-                                  controller.changeCountryValue(newValue);
-                                }
-                              },
-                              items: controller.countryNames.
-                              map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(value),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        ],
-                      );
-                    }
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-
-
-
-              Padding(
-                padding: const EdgeInsets.only(top:3.0,left:18,right:18),
-                child: SizedBox(
-                  height: 82,
-                  child: CustomTextFormField(
-                      hint: 'password'.tr,
-                      obx: true,
-                      type: TextInputType.visiblePassword,
-                      obs: true,
-                      color: AppColors.textColorDark,
-                      controller: controller.passController),
-                ),
-              ),
-
-
-
-              GetBuilder<AuthController>(
-                  builder: (_) {
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        (controller.loading==true)?
-                        CustomButton(
-                            text: "signup".tr,
-                            onPressed: () {
-                              controller.userSignUp();
-                            },
-                            color1: AppColors.buttonColor,
-                            color2: Colors.white):const Center(
-                          child:CircularProgressIndicator(),
-                        )
-                      ],
-                    );
-                  }
-              ),
-
-              const SizedBox(
-                height: 16,
-              ),
-
-
-              InkWell(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Custom_Text(
-                      text: 'haveAccount'.tr,
-                      fontSize: 18,
+              Column(children: [
+                Text('FREELANCING',
+                    style: GoogleFonts.cairo(
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      alignment: Alignment.center,
-                      color: Colors.grey,
+                      color: AppColors.secondaryLightColor,
+                    )),
+                const Text('انشيء حساب جديد',
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: AppColors.primaryDarkColor,
+                        fontFamily: 'Hind'))
+              ]),
+              const SizedBox(
+                height: 50,
+              ),
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
+                    color: AppColors.primaryDarkColor,
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: controller.emailController,
+                      onSaved: (value) {
+                        controller.emailController.text = value!;
+                      },
+                      validator: (value) {
+                        if (value!.length > 100) {
+                          return 'Email Cant Be Larger Than 100 Letter';
+                        }
+                        if (value.length < 4) {
+                          return 'Email Cant Be Smaller Than 4 Letter';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          prefixIcon: Icon(
+                            Icons.account_circle_outlined,
+                            color: AppColors.darkColor,
+                          ),
+                          hintText: 'Email',
+                          hintStyle: TextStyle(color: Colors.black),
+                          labelStyle: TextStyle(color: Colors.black),
+                          labelText: 'Email'),
+                      cursorColor: AppColors.darkColor,
                     ),
                     const SizedBox(
-                      width: 15,
+                      height: 20,
                     ),
-                    Custom_Text(
-                        text: 'login'.tr,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        alignment: Alignment.center,
-                        color: Colors.black
+                    TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: controller.passController,
+                      onSaved: (value) {
+                        controller.passController.text = value!;
+                      },
+                      validator: (value) {
+                        if (value!.length > 100) {
+                          return 'PassWord Cant Be Larger Than 100 Letter';
+                        }
+                        if (value.length < 4) {
+                          return 'Password Cant Be Smaller Than 4 Letter';
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          prefixIcon: Icon(
+                            Icons.admin_panel_settings_sharp,
+                            color: AppColors.darkColor,
+                          ),
+                          hintText: 'Password',
+                          hintStyle: TextStyle(color: Colors.black),
+                          labelStyle: TextStyle(color: Colors.black),
+                          labelText: 'Password',
+                          focusColor: AppColors.whiteColor),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: controller.passController,
+                      onSaved: (value) {
+                        controller.passController.text = value!;
+                      },
+                      validator: (value) {
+                        if (value!.length > 100) {
+                          return 'PassWord Cant Be Larger Than 100 Letter';
+                        }
+                        if (value.length < 4) {
+                          return 'Password Cant Be Smaller Than 4 Letter';
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          prefixIcon: Icon(
+                            Icons.admin_panel_settings_sharp,
+                            color: AppColors.darkColor,
+                          ),
+                          hintText: 'Password',
+                          hintStyle: TextStyle(color: Colors.black),
+                          labelStyle: TextStyle(color: Colors.black),
+                          labelText: 'Password',
+                          focusColor: AppColors.whiteColor),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: controller.passController,
+                      onSaved: (value) {
+                        controller.passController.text = value!;
+                      },
+                      validator: (value) {
+                        if (value!.length > 100) {
+                          return 'PassWord Cant Be Larger Than 100 Letter';
+                        }
+                        if (value.length < 4) {
+                          return 'Password Cant Be Smaller Than 4 Letter';
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          prefixIcon: Icon(
+                            Icons.admin_panel_settings_sharp,
+                            color: AppColors.darkColor,
+                          ),
+                          hintText: 'Password',
+                          hintStyle: TextStyle(color: Colors.black),
+                          labelStyle: TextStyle(color: Colors.black),
+                          labelText: 'Password',
+                          focusColor: AppColors.whiteColor),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 3.0, left: 18, right: 18),
+                      child: GetBuilder<AuthController>(builder: (_) {
+                        return Column(
+                          children: [
+                            Row(
+                              children: [
+                                Custom_Text(
+                                  text: 'selectCat'.tr,
+                                  fontSize: 16,
+                                  color: AppColors.textColorDark,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.83,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(13),
+                                  color: Colors.grey[100]!),
+                              child: DropdownButton<String>(
+                                value: controller.selectedItem,
+                                onChanged: (String? newValue) {
+                                  if (newValue != null) {
+                                    controller.changeCatValue(newValue);
+                                  }
+                                },
+                                items: controller.catNames
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(value),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 3.0, left: 18, right: 18),
+                      child: GetBuilder<AuthController>(builder: (_) {
+                        return Column(
+                          children: [
+                            Row(
+                              children: [
+                                Custom_Text(
+                                  text: 'selectCountry'.tr,
+                                  fontSize: 16,
+                                  color: AppColors.textColorDark,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.83,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(13),
+                                  color: Colors.grey[100]!),
+                              child: DropdownButton<String>(
+                                value: controller.selectedCountry,
+                                onChanged: (String? newValue) {
+                                  if (newValue != null) {
+                                    controller.changeCountryValue(newValue);
+                                  }
+                                },
+                                items: controller.countryNames
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(value),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          elevation: 7,
+                          fixedSize: const Size(300, 60),
+                          shadowColor: AppColors.darkColor,
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 0.1, color: AppColors.darkColor),
+                              borderRadius: BorderRadius.circular(10)),
+                          backgroundColor: AppColors.whiteColor),
+                      child: const Text(
+                        "Register",
+                        style: TextStyle(
+                          color: AppColors.primaryDarkColor,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      onPressed: () {
+                        controller.userLogin();
+                      },
                     ),
                   ],
                 ),
-                onTap: () {
-                  Get.to(Routes.LOGIN );
-                },
               ),
-              const SizedBox(
-                height: 10,
-              ),
-
             ],
           ),
         ),
