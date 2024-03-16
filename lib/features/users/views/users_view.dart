@@ -56,6 +56,7 @@ class UsersView extends GetView<UsersController> {
                     hint: 'email'.tr,
                     obx: false,
                     type: TextInputType.emailAddress,
+                    icon:Icons.email,
                     obs: false,
                     color: AppColors.textColorDark,
                     controller: controller.emailController,),
@@ -86,8 +87,7 @@ class UsersView extends GetView<UsersController> {
                             onPressed: () {
                               controller.userLogin();
                             },
-                            color1: AppColors.buttonColor,
-                            color2: AppColors.buttonColor2):const Center(
+                          ):const Center(
                           child:CircularProgressIndicator(),
                         )
                       ],

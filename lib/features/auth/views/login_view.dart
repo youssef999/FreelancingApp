@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelancerApp/core/widgets/custom_textformfield.dart';
 import 'package:freelancerApp/features/auth/controllers/auth_controller.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -45,89 +46,18 @@ class LoginView extends GetView<AuthController> {
                     borderRadius: BorderRadius.all(Radius.circular(25))),
                 child: Column(
                   children: [
-                    TextFormField(
-                      controller: controller.emailController,
-                      onSaved: (value) {
-                        controller.emailController.text = value!;
-                      },
-                      validator: (value) {
-                        if (value!.length > 100) {
-                          return 'Email Cant Be Larger Than 100 Letter';
-                        }
-                        if (value.length < 4) {
-                          return 'Email Cant Be Smaller Than 4 Letter';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          fillColor: AppColors.whiteColor,
-                          filled: true,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: AppColors.whiteColor),
-                              borderRadius: BorderRadius.circular(20)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: AppColors.whiteColor),
-                              borderRadius: BorderRadius.circular(20)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: AppColors.whiteColor),
-                              borderRadius: BorderRadius.circular(20)),
-                          prefixIcon: Icon(
-                            Icons.account_circle_outlined,
-                            color: AppColors.darkColor,
-                          ),
-                          hintText: 'Email',
-                          hintStyle: TextStyle(color: Colors.black),
-                          labelStyle: TextStyle(color: Colors.black),
-                          labelText: 'Email'),
-                      cursorColor: AppColors.darkColor,
-                    ),
+                    CustomTextFormField(hint: 'email'.tr
+                    , obs: false, color:AppColors.textColorDark,
+                    validateMessage: 'wrongEmail'.tr
+                    , controller: controller.emailController),
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: controller.passController,
-                      onSaved: (value) {
-                        controller.passController.text = value!;
-                      },
-                      validator: (value) {
-                        if (value!.length > 100) {
-                          return 'PassWord Cant Be Larger Than 100 Letter';
-                        }
-                        if (value.length < 4) {
-                          return 'Password Cant Be Smaller Than 4 Letter';
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          fillColor: AppColors.whiteColor,
-                          filled: true,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: AppColors.whiteColor),
-                              borderRadius: BorderRadius.circular(20)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: AppColors.whiteColor),
-                              borderRadius: BorderRadius.circular(20)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: AppColors.whiteColor),
-                              borderRadius: BorderRadius.circular(20)),
-                          prefixIcon: Icon(
-                            Icons.admin_panel_settings_sharp,
-                            color: AppColors.darkColor,
-                          ),
-                          hintText: 'Password',
-                          hintStyle: TextStyle(color: Colors.black),
-                          labelStyle: TextStyle(color: Colors.black),
-                          labelText: 'Password',
-                          focusColor: AppColors.whiteColor),
-                    ),
+                     CustomTextFormField(hint: 'password'.tr
+                    , obs: true, color:AppColors.textColorDark,
+                    validateMessage: 'wrongPass'.tr,obx: true
+                    , controller: controller.passController),
+                   
                     const SizedBox(
                       height: 30,
                     ),

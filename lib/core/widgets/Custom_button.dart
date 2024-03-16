@@ -7,13 +7,10 @@ import '../resources/app_colors.dart';
 
   final String  text;
   final Function  onPressed;
-  final Color  color1,color2;
 
   const CustomButton({super.key, 
     required this.text,
     required this.onPressed,
-    required this.color1,
-    required this.color2,
   });
 
 
@@ -21,15 +18,14 @@ import '../resources/app_colors.dart';
   Widget build(BuildContext context) {
     return
       SizedBox(
-        width:200,
+        width:110,
         height:62,
         child:InkWell(
           child: 
           Container(
             decoration:  BoxDecoration(
-              color: AppColors.primary,
+              color: AppColors.buttonColor,
                 borderRadius: const BorderRadius.all(Radius.circular(22)),
-              border:Border.all(color:Colors.blue),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.lightColor.withOpacity(0.1),
