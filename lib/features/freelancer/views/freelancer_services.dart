@@ -32,15 +32,23 @@ class _FreelancerServicesViewState extends State<FreelancerServicesView> {
 
         const SizedBox(height: 12,),
 
-        GridView.builder(
-          itemCount: controller.serviceList.length,
-          shrinkWrap: true,
-          gridDelegate: 
-        const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
-        itemBuilder: (context, index) {
-          
-          return ServiceCardWidget(data:controller.serviceList[index]);
-        })
+          GetBuilder<FreelancerServicesController>(
+          builder: (_) {
+            return GridView.builder(
+              itemCount: controller.serviceList.length,
+              shrinkWrap: true,
+              gridDelegate: 
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
+            childAspectRatio:1.1,
+            crossAxisSpacing: 10
+            //mainAxisExtent: 1
+            ), 
+            itemBuilder: (context, index) {
+              
+              return ServiceCardWidget(data:controller.serviceList[index]);
+            });
+          }
+        )
 
 
 

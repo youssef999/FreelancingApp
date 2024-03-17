@@ -1,4 +1,5 @@
 import 'package:freelancerApp/features/freelancer/views/add_service_view.dart';
+import 'package:freelancerApp/features/freelancer/views/freelancer_services.dart';
 import 'package:freelancerApp/features/home/views/home_view.dart';
 import 'package:freelancerApp/features/root/view/fifth.dart';
 import 'package:freelancerApp/features/root/view/fourth.dart';
@@ -12,8 +13,9 @@ class RootController extends GetxController {
      HomeView(),
      SecondScreen(),
      const AddServicesView(),
+     const FreelancerServicesView(),
   
-    const ForthScreen(),
+    //const ForthScreen(),
     const FifthScreen()
   ];
   void selectedPage(int index) {

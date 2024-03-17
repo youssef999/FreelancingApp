@@ -25,7 +25,6 @@ List<Map<String,dynamic>>serviceList=[];
           .map((DocumentSnapshot doc) => doc.data() as Map<String, dynamic>)
           .toList();
       serviceList = data;
-      
     } catch (e) {
       // ignore: avoid_print
       print("E.......");

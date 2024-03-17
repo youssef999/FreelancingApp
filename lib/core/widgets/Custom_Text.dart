@@ -12,7 +12,7 @@ class Custom_Text extends StatelessWidget {
   const Custom_Text(
       {super.key, required this.text,
       this.fontSize = 16.0,
-        this.fontWeight=FontWeight.w600,
+        this.fontWeight=FontWeight.w500,
         this.textAlign=TextAlign.center,
       this.color = Colors.black,
       this.alignment = Alignment.center,
@@ -21,16 +21,13 @@ class Custom_Text extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return 
-     Text(  //textAlign:textAlign,
+     Text(  
         text,
           style: TextStyle(
-        //  GoogleFonts.tajawal(
             color:color,
             fontSize: fontSize,
-            //  fontWeight:fontWeight,
+              fontWeight:fontWeight,
           fontFamily:'MYRIADPRO',
-          //fontWeight,
-            //textBaseline: TextBaseline.alphabetic
           )
       
     );

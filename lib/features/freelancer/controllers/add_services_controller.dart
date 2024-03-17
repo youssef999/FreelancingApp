@@ -2,14 +2,13 @@
 
 import 'dart:io';
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/const/app_message.dart';
 import 'package:freelancerApp/core/widgets/Custom_Text.dart';
-import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddServiceController extends GetxController{
@@ -45,13 +44,28 @@ List<String>catList=[];
     selectedCategory = value;
     update();
   }
+  
 
-@override
-onClose(){
-selectedCategory='ترجمة';
-}
+  deleteService(String itemId)async{
+
+  try{
+      await FirebaseFirestore.instance
+      .collection('services').doc(itemId).delete();
+        
+  }catch(e){
+  // ignore: avoid_print
+  print(e);
+  appMessage(text: e.toString(), fail: true);
+ }
+
+ Future.delayed(const Duration(seconds: 2)).then((value) {
+  appMessage(text: 'itemDelet'.tr, fail: false);
+  Get.offAllNamed('/bottomBar');
+ });  
 
 
+
+  }
 
 
 
@@ -155,6 +169,10 @@ selectedCategory='ترجمة';
   }
 
   addServiceToFireStore()async {
+    final box=GetStorage();
+    String freelancer_email=box.read('freelancer_email')??'x';
+
+    
 const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)*&1!';
   Random random = Random();
   String result = '';
@@ -171,6 +189,10 @@ await FirebaseFirestore.instance.collection('services')
    'service_name':serviceNameController.text,
    'service_details':serviceDescriptionController.text,
     'price':servicePriceController.text,
+    'category':selectedCategory,
+    'freelancer_email':freelancer_email,
+    //'service_image':downloadUrls
+
    // 'service_image':downloadUrls[0],
     }).then((value) {
       isLoading=false;
@@ -189,6 +211,55 @@ await FirebaseFirestore.instance.collection('services')
   
 }
 
+
+updatService(String itemId) async {
+ 
+ isLoading=true;
+ 
+ update();
+
+try{
+ if(serviceNameController.text.isNotEmpty){
+    await FirebaseFirestore.instance.
+    collection('services').doc(itemId)
+        .update({
+         'name':serviceNameController.text
+        });
+ }
+
+  if(serviceDescriptionController.text.isNotEmpty){
+    await FirebaseFirestore.instance.
+    collection('services').doc(itemId)
+        .update({
+         'details':serviceDescriptionController.text
+        });
+ }
+
+ if(servicePriceController.text.isNotEmpty){
+    await FirebaseFirestore.instance.
+    collection('services').doc(itemId)
+        .update({
+         'price':servicePriceController.text
+        });
+   }
+        isLoading=false;
+        update();
+
+  }catch(e){
+    isLoading=false;
+    update();
+  // ignore: avoid_print
+  print(e);
+
+//  appMessage(text: e.toString(), fail: true);
+
+  }
+ 
+
+ Future.delayed(const Duration(seconds: 2)).then((value) {
+  appMessage(text: 'serviceUpdate'.tr, fail: false);
+ });  
+}
 
 startAddingService(){
   //uploadMultiImageToFirebaseStorage(pickedImageXFiles!).then((value) {
@@ -209,6 +280,7 @@ Future uploadMultiImageToFirebaseStorage(List<XFile> images) async {
         downloadUrls.add(downloadUrl);
       } catch (e) {
         // Handle any errors that occur during the upload process
+        // ignore: avoid_print
         print('Error uploading image to Firebase Storage: $e');
       }
     }

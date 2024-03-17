@@ -12,6 +12,7 @@ class MyLocal implements Translations{
         "ar":{
           "serviceName":"اسم الخدمة",
           "servicePrice":"سعر الخدمة",
+          "serviceUpdate":"تم تعديل الخدمة",
           'serviceDetails':"وصف الخدمة",
           "selectCat":'اختر القسم',
           'addService':"اضافة خدمة",
@@ -22,6 +23,10 @@ class MyLocal implements Translations{
           "register":'تسجيل',
             "addServiceImage":"اضافة صورة الخدمة",
 
+            "edit":"تعديل",
+            "delete":"حذف",
+            "add":"اضافة",
+ "editServiceImage":"تعديل صورة الخدمة",
 
 
 
@@ -43,8 +48,10 @@ class MyLocal implements Translations{
         "en":{
 
            "serviceName":"Service Name",
+           "editServiceImage":"Edit Service Image",
           "servicePrice":"Service Price",
           'serviceDetails':"Service Details",
+            "serviceUpdate":"Service Updated",
           "selectCat":'Select Category',
           'addService':"Add Service",
           "search":'Search',
@@ -52,7 +59,10 @@ class MyLocal implements Translations{
           "password":'Password',
           "login":'Login',
           "register":'Register',
-          "addServiceImage":"Add Service Image"
+          "addServiceImage":"Add Service Image",
+           "edit":"Edit",
+            "delete":"Delete",
+            "add":"Add",
 
 
 

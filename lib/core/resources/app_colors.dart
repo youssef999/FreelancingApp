@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 class AppColors {
   static Color mainly = const Color.fromARGB(255, 240, 240, 240);
 
-  static Color primary = Color(0xFF635BFE);
-  static Color cardColor = Colors.white;
+  static Color primary = const Color(0xFF635BFE);
+  static Color cardColor =  Colors.white;
+  //Color(0xffececec);
   static Color cardColor2 = Colors.white;
-  static Color backgroundColor = Colors.white;
+  static Color backgroundColor = const Color(0xffececec);
   static Color appBarColor = const Color(0xff041CB4);
   static Color iconColor = AppColors.primary;
   static Color lightColor = Colors.white;
@@ -19,7 +20,7 @@ class AppColors {
   static Color buttonColor2 = Colors.white;
 
   static Color textColorLight = Colors.white;
-  static Color textColorGreyMode = Colors.grey[100]!;
+  static Color textColorGreyMode = Colors.grey;
   static Color textColorDark = Colors.black;
 
   static Color success = Colors.green;

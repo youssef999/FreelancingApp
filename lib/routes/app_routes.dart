@@ -1,5 +1,6 @@
 class Routes {
   static const LOGIN = '/login';
+  static const SERVICE_DETAILS ='/ServiceDetailsView';
   static const REGISTER = '/register';
   static const HOME = '/home';
   static const USERS = '/users';

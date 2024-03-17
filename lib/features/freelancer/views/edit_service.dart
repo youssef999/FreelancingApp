@@ -1,43 +1,36 @@
-
-
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/Custom_button.dart';
-
 import 'package:freelancerApp/core/widgets/custom_dropdown.dart';
 import 'package:freelancerApp/core/widgets/custom_textformfield.dart';
 import 'package:freelancerApp/features/freelancer/controllers/add_services_controller.dart';
 import 'package:get/get.dart';
-
 import '../../../core/widgets/Custom_Text.dart';
 
-class AddServicesView extends StatefulWidget {
-  const AddServicesView({super.key});
+// ignore: must_be_immutable
+class EditServicesView extends StatefulWidget {
+  Map<String,dynamic>data;
+  
+   EditServicesView({super.key,required this.data});
 
   @override
-  State<AddServicesView> createState() => _AddServicesViewState();
+  State<EditServicesView> createState() => _AddServicesViewState();
 }
 
-class _AddServicesViewState extends State<AddServicesView> {
+class _AddServicesViewState extends State<EditServicesView> {
 
  AddServiceController controller=Get.put(AddServiceController(),permanent: true);
   
 
-
-
-
   @override
   void initState() {
-controller.getAllCategories();
-
+   controller.getAllCategories();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor:AppColors.backgroundColor,
       body:Padding(
@@ -93,12 +86,13 @@ controller.getAllCategories();
                                     child:Icon(Icons.image,size: 60,)
                                   ),
                                   const SizedBox(height: 10,),
-                                  Custom_Text(text: 'addServiceImage'.tr,color:Colors.black,
+                                  Custom_Text(text: 'editServiceImage'.tr,color:Colors.black,
                                     fontSize:21,alignment:Alignment.center,
                                   ),
                                 ],
                               ),
-                              onTap:(){
+                              onTap:() {
+
                                 controller.pickMultiImage();
                               //  cubit.showDialogBox(context);
                               },
@@ -115,10 +109,9 @@ controller.getAllCategories();
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
                     children: [
-                      CustomTextFormField(hint: 'serviceName'.tr,
+                      CustomTextFormField(hint: widget.data['name'],
                       validateMessage: '',
                       icon:Icons.design_services,
-                      
                        obs: false, color: AppColors.textColorDark
                        , controller: controller.serviceNameController),
                 
@@ -134,8 +127,16 @@ controller.getAllCategories();
                           children: [
                             Row(
                               children: [
-                                Custom_Text(text: 'selectCat'.tr,
-                                fontSize: 16,color:AppColors.textColorLight,
+                                Row(
+                                  children: [
+                                    Custom_Text(text: 'selectCat'.tr,
+                                    fontSize: 16,color:AppColors.textColorLight,
+                                    ),
+                                    const SizedBox(width: 7,),
+                                      Custom_Text(text: widget.data['cat'].toString(),
+                                    fontSize: 16,color:AppColors.textColorGreyMode,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -156,7 +157,7 @@ controller.getAllCategories();
                     ),
                   ),
                               const SizedBox(height: 15,),
-                               CustomTextFormField(hint: 'serviceDetails'.tr,
+                               CustomTextFormField(hint: widget.data['details'],
                                icon:Icons.description,
                    obs: false, color: AppColors.textColorDark,
                 
@@ -167,7 +168,7 @@ controller.getAllCategories();
                             
                               const SizedBox(height: 15),
                             
-                               CustomTextFormField(hint: 'servicePrice'.tr,
+                               CustomTextFormField(hint: widget.data['price'].toString(),
                                icon:Icons.price_change,
                                
                    obs: false, color: AppColors.textColorDark,
@@ -184,11 +185,11 @@ controller.getAllCategories();
           
 
                Padding(
-                 padding: const EdgeInsets.only(left:25.0,right: 25),
-                 child: CustomButton(text: 'addService'.tr
+                 padding: const EdgeInsets.only(left:35.0,right: 35,bottom:15),
+                 child: CustomButton(text: 'edit'.tr
                  , onPressed: (){
-                 
-                               controller. startAddingService();
+                
+                               controller. updatService(widget.data['service_id']);
                              
                  }, ),
                )
