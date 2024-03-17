@@ -43,14 +43,7 @@ import '../resources/app_colors.dart';
                 Text(
                   text,style:const TextStyle(color:Colors.white,fontSize: 17),
                 ),
-                // Custom_Text(
-                //   text: text,
-                //   fontSize: 17,
-                //   color:Colors.white,
-                //   alignment: Alignment.center,
-                //   fontWeight:FontWeight.w500,
-                //               //    color: color2,
-                // ),
+              
               ),
             ),
           ),

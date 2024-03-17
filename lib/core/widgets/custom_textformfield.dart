@@ -40,6 +40,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Widget build(BuildContext context) {
     if (widget.obx == true) {
       return  TextFormField(
+        
                       keyboardType: TextInputType.visiblePassword,
                       controller: widget.controller,
                       onSaved: (value) {
@@ -84,8 +85,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 });
               }),
                           hintText: 'Password',
-                          hintStyle: const TextStyle(color: Colors.black),
-                          labelStyle: const TextStyle(color: Colors.black),
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          labelStyle: const TextStyle(color: Colors.grey),
                           labelText: 'Password',
                           focusColor: AppColors.whiteColor),
                     );
@@ -94,8 +95,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     }
 
     if (widget.obx == false) {
-      if(widget.max!>=2){
+      if(widget.max!>2){
         return    TextFormField(
+          maxLines: widget.max,
+          keyboardType:widget.type,
                       controller: widget.controller,
                       onSaved: (value) {
                         widget.controller.text= value!;
@@ -113,73 +116,74 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       },
                       decoration: InputDecoration(
                           fillColor: AppColors.whiteColor,
-                          filled: true,
+                        filled: true,
                           border: OutlineInputBorder(
                               borderSide: const BorderSide(
                                   width: 1, color: AppColors.whiteColor),
                               borderRadius: BorderRadius.circular(20)),
                           focusedBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
-                                  width: 1, color: AppColors.whiteColor),
+                                  width: 3, color: AppColors.secondaryDarkColor),
                               borderRadius: BorderRadius.circular(20)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  width: 1, color: AppColors.whiteColor),
-                              borderRadius: BorderRadius.circular(20)),
+                        
                           prefixIcon: Icon(
                            widget.icon,
-                            color: AppColors.darkColor,
+                            color: AppColors.primaryDarkColor
                           ),
                           hintText: widget.hint,
-                          hintStyle: const TextStyle(color: Colors.black),
-                          labelStyle: const TextStyle(color: Colors.black),
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          labelStyle: const TextStyle(color: Colors.grey),
                           labelText: widget.hint),
                       cursorColor: AppColors.darkColor,
                     );
       }
       else{
-        return Container(
-          height:82,
-          decoration:const BoxDecoration(
-              color:Colors.white),
-          padding: const EdgeInsets.all(11),
-          child: TextFormField(
-            obscureText: widget.obs,
-            keyboardType: widget.type,
-            maxLines: widget.max,
-            controller: widget.controller,
-            style: const TextStyle(
-                color: Colors.black,
-                fontSize: 14
-            ),
-            decoration: InputDecoration(
-              focusedBorder:  OutlineInputBorder(
-                borderSide:  BorderSide(
-                  color: AppColors.primary, // Change border color here
-                  width: 2.0,
-                ),
-                borderRadius: BorderRadius.circular(14.0),
-              ),
-              border: OutlineInputBorder(
-
-                borderSide: const BorderSide(
-                  color: Colors.blue, // Border color
-                  width: 2.0, // Border width
-                ),
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              labelStyle: TextStyle(
-                  color: widget.color,
-                  fontSize:12
-              ),
-              label: Text(widget.hint,style:const TextStyle(color:Colors.grey)),
-
-              //  hintText: widget.hint,
-              //hintStyle: TextStyle(color: Colors.grey),
-              fillColor: Colors.white,
-            ),
-          ),
-        );
+        return 
+        
+          TextFormField(
+            
+             keyboardType:widget.type,
+                      controller: widget.controller,
+                  //    maxLines: widget.max,
+                      onSaved: (value) {
+                        widget.controller.text= value!;
+                      },
+                      validator: (value) {
+                        if (value!.length > 100) {
+                          return widget.validateMessage;
+                          //return 'Email Cant Be Larger Than 100 Letter';
+                        }
+                        if (value.length < 4) {
+                          return widget.validateMessage;
+                         // return 'Email Cant Be Smaller Than 4 Letter';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                        filled: true,
+                          border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 1, color: AppColors.whiteColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 3, color: AppColors.secondaryDarkColor),
+                              borderRadius: BorderRadius.circular(20)),
+                          // enabledBorder: OutlineInputBorder(
+                          //     borderSide: const BorderSide(
+                          //         width: 1, color: AppColors.cardLightTextColor),
+                          //     borderRadius: BorderRadius.circular(20)),
+                          prefixIcon: Icon(
+                           widget.icon,
+                            color: AppColors.primaryDarkColor
+                          ),
+                          hintText: widget.hint,
+                          hintStyle: const TextStyle(color: Colors.grey),
+                          labelStyle: const TextStyle(color: Colors.grey),
+                          labelText: widget.hint),
+                      cursorColor: AppColors.darkColor,
+                    );
       }
 
     }

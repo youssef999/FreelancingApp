@@ -46,11 +46,17 @@ List<String>catList=[];
     update();
   }
 
+@override
+onClose(){
+selectedCategory='ترجمة';
+}
+
 
 
 
 
  getAllCategories() async {
+  print("CATTT");
     categoryList = [];
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('cat').get();
@@ -62,6 +68,7 @@ List<String>catList=[];
       for (int i = 0; i < categoryList.length; i++) {
         catNames.add(categoryList[i]['name']);
       }
+      selectedCategory=catNames[0];
     } catch (e) {
       // ignore: avoid_print
       print("E.......");
@@ -164,7 +171,7 @@ await FirebaseFirestore.instance.collection('services')
    'service_name':serviceNameController.text,
    'service_details':serviceDescriptionController.text,
     'price':servicePriceController.text,
-    //'service_image':downloadUrls[0],
+   // 'service_image':downloadUrls[0],
     }).then((value) {
       isLoading=false;
       update();

@@ -5,7 +5,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/Custom_button.dart';
-import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
+
+import 'package:freelancerApp/core/widgets/custom_dropdown.dart';
 import 'package:freelancerApp/core/widgets/custom_textformfield.dart';
 import 'package:freelancerApp/features/freelancer/controllers/add_services_controller.dart';
 import 'package:get/get.dart';
@@ -21,29 +22,34 @@ class AddServicesView extends StatefulWidget {
 
 class _AddServicesViewState extends State<AddServicesView> {
 
-  final controller=Get.put(AddServiceController());
+ AddServiceController controller=Get.put(AddServiceController(),permanent: true);
+  
+
+
+
 
   @override
   void initState() {
-
 controller.getAllCategories();
+
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-  
+    
     return Scaffold(
-      appBar:CustomAppBar('',context,false),
+      backgroundColor:AppColors.backgroundColor,
       body:Padding(
         padding: const EdgeInsets.all(5.0),
         child: GetBuilder<AddServiceController>(
           builder: (_) {
             return ListView(children: [
-                            const SizedBox(height: 20,),
                             (controller.pickedImageXFiles != null
                                 && controller.pickedImageXFiles!.isNotEmpty)?
                             Column(
                               children: [
+                                const SizedBox(height: 10,),
                                 Container(
                                   decoration:BoxDecoration(border:
                                   Border.all(color:AppColors.primary,
@@ -98,91 +104,95 @@ controller.getAllCategories();
                               },
                             ),
                             const SizedBox(height: 5,),
-            
-            
-            
-            
-            
-            
-            
-              CustomTextFormField(hint: 'serviceName'.tr,
-              validateMessage: '',
-               obs: false, color: AppColors.textColorDark
-               , controller: controller.serviceNameController),
-            
-               const SizedBox(height: 5,),
-
-                 const SizedBox(
-                height: 15,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(top:3.0,left:18,right:18),
-                child: GetBuilder<AddServiceController>(
-                  builder: (_) {
-                    return Column(
-                      children: [
-                        Row(
+     
+              Container(
+              //  height:300,
+                decoration:BoxDecoration(borderRadius:BorderRadius.circular(21),
+                color:AppColors.primary
+                
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                      CustomTextFormField(hint: 'serviceName'.tr,
+                      validateMessage: '',
+                      icon:Icons.design_services,
+                      
+                       obs: false, color: AppColors.textColorDark
+                       , controller: controller.serviceNameController),
+                
+                        const SizedBox(
+                    height: 15,
+                  ),
+                  
+                  Padding(
+                    padding: const EdgeInsets.only(top:3.0,left:18,right:18),
+                    child: GetBuilder<AddServiceController>(
+                      builder: (_) {
+                        return Column(
                           children: [
-                            Custom_Text(text: 'selectCat'.tr,
-                            fontSize: 16,color:AppColors.textColorDark,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6,),
-                        Container(
-                          width:MediaQuery.of(context).size.width*0.83,
-                          decoration:BoxDecoration(
-                            borderRadius:BorderRadius.circular(13),
-                            color:Colors.grey[100]!
-                          ),
-                          child: DropdownButton<String>(
-                            value:controller.selectedCategory,
-                            onChanged: (String? newValue) {
-                              if (newValue != null) {
-                                controller.changeCatValue(newValue);
-                              }
-                            },
-                            items: controller.catNames.map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(value),
+                            Row(
+                              children: [
+                                Custom_Text(text: 'selectCat'.tr,
+                                fontSize: 16,color:AppColors.textColorLight,
                                 ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    );
-                  }
+                              ],
+                            ),
+                            const SizedBox(height: 6,),
+
+                            SizedBox(
+                             height:60,
+                             width: MediaQuery.of(context).size.width,
+                              child: CustomDropDown(value: controller.selectedCategory,
+                                items: controller.catNames,
+                                function:  controller.changeCatValue,
+                                
+                              ),
+                            ),
+                           
+                          ],
+                        );
+                      }
+                    ),
+                  ),
+                              const SizedBox(height: 15,),
+                               CustomTextFormField(hint: 'serviceDetails'.tr,
+                               icon:Icons.description,
+                   obs: false, color: AppColors.textColorDark,
+                
+                   validateMessage: '',
+                   max: 6
+                   , controller: controller.serviceDescriptionController),
+                              
+                            
+                              const SizedBox(height: 15),
+                            
+                               CustomTextFormField(hint: 'servicePrice'.tr,
+                               icon:Icons.price_change,
+                               
+                   obs: false, color: AppColors.textColorDark,
+                   validateMessage: '',
+                   type:TextInputType.number
+                   , controller: controller.servicePriceController),
+                              
+                   const SizedBox(height: 15),
+                    ],
+                  ),
                 ),
               ),
-            
-             CustomTextFormField(hint: 'serviceDetails'.tr,
-               obs: false, color: AppColors.textColorDark,
-               validateMessage: '',
-               max: 6
-               , controller: controller.serviceDescriptionController),
-            
-            
-            const SizedBox(height: 5,),
-            
-             CustomTextFormField(hint: 'servicePrice'.tr,
-               obs: false, color: AppColors.textColorDark,
-               validateMessage: '',
-               type:TextInputType.number
-               , controller: controller.servicePriceController),
-            
-               const SizedBox(height: 5),
-            
-               CustomButton(text: 'addService'.tr
-               , onPressed: (){
+              const SizedBox(height: 15),
+          
 
-              controller. startAddingService();
-            
-               }, )
+               Padding(
+                 padding: const EdgeInsets.only(left:25.0,right: 25),
+                 child: CustomButton(text: 'addService'.tr
+                 , onPressed: (){
+                 
+                               controller. startAddingService();
+                             
+                 }, ),
+               )
             
                
             

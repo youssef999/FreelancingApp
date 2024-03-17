@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:freelancerApp/core/localization/local.dart';
 import 'package:freelancerApp/firebase_options.dart';
 import 'package:freelancerApp/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -11,9 +12,24 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+    final box=GetStorage();
+     ///en //ar //' '
+    Locale lang=const Locale('ar');
+    String langx=box.read('locale')??'x';
+    if(langx!='x'){
+      lang=Locale(langx);
+    }
+    else{
+      print("Here");
+      lang=const Locale('ar');
+      box.write('locale','ar');
+    }
   runApp(
     GetMaterialApp(
+      translations: MyLocal(),
       title: "FreeLancers",
+     locale:lang,
       initialRoute: Theme1AppPages.INITIAL,
       getPages: Theme1AppPages.routes,
       debugShowCheckedModeBanner: false,
