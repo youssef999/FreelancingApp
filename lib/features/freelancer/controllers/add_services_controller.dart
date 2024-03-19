@@ -45,7 +45,6 @@ List<String>catList=[];
     update();
   }
   
-
   deleteService(String itemId)async{
 
   try{
@@ -70,6 +69,7 @@ List<String>catList=[];
 
 
  getAllCategories() async {
+  // ignore: avoid_print
   print("CATTT");
     categoryList = [];
     QuerySnapshot querySnapshot =

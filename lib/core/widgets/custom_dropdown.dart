@@ -14,7 +14,9 @@ class CustomDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return  
+    
+    Container(
                               width:MediaQuery.of(context).size.width*0.83,
                               decoration:BoxDecoration(
                                 borderRadius:BorderRadius.circular(13),

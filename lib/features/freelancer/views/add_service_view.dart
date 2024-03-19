@@ -5,13 +5,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/Custom_button.dart';
-
-import 'package:freelancerApp/core/widgets/custom_dropdown.dart';
 import 'package:freelancerApp/core/widgets/custom_textformfield.dart';
 import 'package:freelancerApp/features/freelancer/controllers/add_services_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../core/widgets/Custom_Text.dart';
+import '../../../core/widgets/custom_dropdown.dart';
 
 class AddServicesView extends StatefulWidget {
   const AddServicesView({super.key});
@@ -22,12 +21,8 @@ class AddServicesView extends StatefulWidget {
 
 class _AddServicesViewState extends State<AddServicesView> {
 
- AddServiceController controller=Get.put(AddServiceController(),permanent: true);
+ AddServiceController controller=Get.put(AddServiceController());
   
-
-
-
-
   @override
   void initState() {
 controller.getAllCategories();
@@ -140,15 +135,13 @@ controller.getAllCategories();
                               ],
                             ),
                             const SizedBox(height: 6,),
-                            SizedBox(
-                             height:60,
-                             width: MediaQuery.of(context).size.width,
-                              child: CustomDropDown(value: controller.selectedCategory,
+                           
+                         
+                              
+                              CustomDropDown(value: controller.selectedCategory,
                                 items: controller.catNames,
-                                function:  controller.changeCatValue,
-                                
-                              ),
-                            ),
+                                function:  controller.changeCatValue, ),
+                            
                            
                           ],
                         );
@@ -184,7 +177,7 @@ controller.getAllCategories();
           
 
                Padding(
-                 padding: const EdgeInsets.only(left:25.0,right: 25),
+                 padding: const EdgeInsets.only(left:25.0,right: 25,bottom:22),
                  child: CustomButton(text: 'addService'.tr
                  , onPressed: (){
                  

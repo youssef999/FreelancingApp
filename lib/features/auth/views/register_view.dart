@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/widgets/Custom_Text.dart';
+import 'package:freelancerApp/core/widgets/custom_dropdown.dart';
 import 'package:freelancerApp/core/widgets/custom_textformfield.dart';
 import 'package:freelancerApp/features/auth/controllers/auth_controller.dart';
 import 'package:get/get.dart';
@@ -119,7 +120,7 @@ class SignUpView extends GetView<AuthController> {
                                 Custom_Text(
                                   text: 'selectCat'.tr,
                                   fontSize: 16,
-                                  color: AppColors.textColorDark,
+                                  color: AppColors.textColorLight,
                                 ),
                               ],
                             ),
@@ -169,11 +170,15 @@ class SignUpView extends GetView<AuthController> {
                                 Custom_Text(
                                   text: 'selectCountry'.tr,
                                   fontSize: 16,
-                                  color: AppColors.textColorDark,
+                                  color: AppColors.textColorLight,
                                 ),
                               ],
                             ),
                             const SizedBox(
+                              height: 6,
+                            ),
+                          
+                               const SizedBox(
                               height: 6,
                             ),
                             Container(
@@ -206,28 +211,59 @@ class SignUpView extends GetView<AuthController> {
                       }),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 7,
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          elevation: 7,
-                          fixedSize: const Size(300, 60),
-                          shadowColor: AppColors.darkColor,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 0.1, color: AppColors.darkColor),
-                              borderRadius: BorderRadius.circular(10)),
-                          backgroundColor: AppColors.whiteColor),
-                      child: const Text(
-                        "Register",
-                        style: TextStyle(
-                          color: AppColors.primaryDarkColor,
-                        ),
-                        textAlign: TextAlign.center,
+
+                    Row(
+                      children: [
+                        const SizedBox(width: 10,),
+                        Text('selectAccType'.tr, 
+                        style: TextStyle(color: AppColors.textColorLight),),
+                      ],
+                    ),
+                     const SizedBox(
+                      height: 10,
+                    ),
+                      GetBuilder<AuthController>(
+                        builder: (_) {
+                          return SizedBox(
+                                    width: MediaQuery.of(context).size.width * 0.83,
+                                  child: CustomDropDown
+                                  (value: controller.selectAccountType,
+                                   items: controller.accountTypeList,
+                                    function: controller.changeAccountType
+                                    
+                                    ),
+                                );
+                        }
                       ),
-                      onPressed: () {
-                        controller.userLogin();
-                      },
+                    
+                      const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left:18.0,right:18),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            elevation: 7,
+                            fixedSize: const Size(300, 60),
+                            shadowColor: AppColors.darkColor,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    width: 0.1, color: AppColors.darkColor),
+                                borderRadius: BorderRadius.circular(10)),
+                            backgroundColor: AppColors.whiteColor),
+                        child: const Text(
+                          "Register",
+                          style: TextStyle(
+                            color: AppColors.primaryDarkColor,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        onPressed: () {
+                          controller.userSignUp();
+                        },
+                      ),
                     ),
                   ],
                 ),

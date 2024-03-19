@@ -12,7 +12,8 @@ class RootController extends GetxController {
   List page = [
      HomeView(),
      SecondScreen(),
-     const AddServicesView(),
+      SecondScreen(),
+    // const AddServicesView(),
      const FreelancerServicesView(),
   
     //const ForthScreen(),

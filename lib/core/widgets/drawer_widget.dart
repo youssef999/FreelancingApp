@@ -3,8 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/custom_image_widget.dart';
+import 'package:freelancerApp/features/freelancer/orders/views/order_view.dart';
+import 'package:freelancerApp/features/freelancer/views/add_service_view.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -101,7 +104,7 @@ class CustomDrawer extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           )
         ],
@@ -110,6 +113,8 @@ class CustomDrawer extends StatelessWidget {
   }
 
   _drawerWidget(BuildContext context) {
+    final box=GetStorage();
+    int roleId=box.read('roleId');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -117,13 +122,19 @@ class CustomDrawer extends StatelessWidget {
         _drawerTileWidget(
           icon: 'assets/icon/kyc_verification.svg',
           title: 'المستخدمين',
-          onTap: () {},
+          onTap: () {
+            Get.to(const OrdersView());
+          },
         ),
+        (roleId==0)?
         _drawerTileWidget(
           icon: 'assets/icon/transactions_log.svg',
-          title: 'المطورين',
-          onTap: () {},
-        ),
+          title: 'اضف خدمة جديدة',
+          onTap: () {
+            Get.to(const AddServicesView());
+          },
+        ):const SizedBox(),
+
         _drawerTileWidget(
           icon: 'assets/icon/change_password.svg',
           title: 'اعدادات',
@@ -199,7 +210,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Expanded(

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:freelancerApp/features/freelancer/views/service_details_view.dart';
 import 'package:freelancerApp/features/home/controllers/home_controller.dart';
+import 'package:freelancerApp/features/services/views/service_details.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,7 +36,7 @@ class FireBaseView extends GetView<HomeController> {
                 return GestureDetector(
                     child: Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Column(
@@ -42,7 +44,7 @@ class FireBaseView extends GetView<HomeController> {
                         Container(
                             decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25)),
+                                    const BorderRadius.all(Radius.circular(25)),
                                 border: Border.all(
                                     style: BorderStyle.solid,
                                     color: Colors.white,
@@ -62,7 +64,11 @@ class FireBaseView extends GetView<HomeController> {
                       ],
                     ),
                   ],
-                ));
+                ),
+                onTap:(){
+                  Get.to(OrderServiceView(data:post));
+                },
+                );
               },
             ),
           ),

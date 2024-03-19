@@ -73,7 +73,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                               borderRadius: BorderRadius.circular(20)),
                           prefixIcon: Icon(
                             Icons.admin_panel_settings_sharp,
-                            color: AppColors.darkColor,
+                            color: AppColors.primary,
                           ),
                            suffixIcon: IconButton(
               icon: Icon(

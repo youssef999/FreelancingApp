@@ -11,6 +11,12 @@ class MyLocal implements Translations{
       {
         "ar":{
           "serviceName":"اسم الخدمة",
+          "freelancer":"عامل حر",
+            "selectAccType":"اختر نوع الحساب ",
+
+          "user":'مستخدم',
+
+
           "servicePrice":"سعر الخدمة",
           "serviceUpdate":"تم تعديل الخدمة",
           'serviceDetails':"وصف الخدمة",
@@ -28,23 +34,14 @@ class MyLocal implements Translations{
             "add":"اضافة",
  "editServiceImage":"تعديل صورة الخدمة",
 
+ "selectCountry":"اختر الدولة",
 
+ "from":"طلبت الخدمة من : "
 
-
-
-
-
-        
-
-         
-
-
-       
-         
-         
-         
 
         },
+
+        
         "en":{
 
            "serviceName":"Service Name",
@@ -63,9 +60,11 @@ class MyLocal implements Translations{
            "edit":"Edit",
             "delete":"Delete",
             "add":"Add",
-
-
-
+            "selectCountry":"Select Country",
+             "freelancer":"Freelancer",
+          "user":'User',
+          "selectAccType":"Select Account Type",
+          "from":"Service requested from : "
 
         }
       };

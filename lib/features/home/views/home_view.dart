@@ -37,7 +37,7 @@ class HomeView extends GetView<HomeController> {
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Search for  Shirts , Jackets , Pants ...',
-                    hintStyle: TextStyle(height: 1),
+                    hintStyle: const TextStyle(height: 1),
                     border: OutlineInputBorder(
                       borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(30),
@@ -79,7 +79,7 @@ class HomeView extends GetView<HomeController> {
                 typeFilter: 'normal',
                 collection: 'freelancers',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               )
             ],

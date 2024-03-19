@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, avoid_print, duplicate_ignore
+
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,11 +13,18 @@ import 'package:get_storage/get_storage.dart';
 import '../../../../Core/const/app_message.dart';
 
 class AuthController extends GetxController {
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController checkPassController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   bool loading = false;
+  List<String> accountTypeList=[
+    'freelancer'.tr,
+    'user'.tr
+  ];
+  String selectAccountType='freelancer'.tr;
+
 
   @override
   void onInit() async {
@@ -33,6 +42,20 @@ class AuthController extends GetxController {
   final List<String> countryNames = [];
   String selectedItem = 'ترجمة';
   String selectedCountry = 'مصر';
+
+  changeAccountType(String value) {
+    final box=GetStorage();
+    selectAccountType = value;
+    int roleId=0;
+    if(value=='freelancer'.tr){
+    roleId=0;
+    }
+    else{
+      roleId=1;
+    }
+    update();
+    box.write('roleId', roleId);
+  }
 
   changeCatValue(String value) {
     selectedItem = value;
@@ -212,9 +235,9 @@ class AuthController extends GetxController {
         loading = false;
         update();
         addTokenToFirebase();
-        addNewFreelancer();
-        box.write('email', emailController.text);
-        box.write('name', nameController.text);
+         addNewUser() ;
+       // addNewFreelancer();
+       
       });
     } catch (e) {
       print(e);
@@ -223,7 +246,47 @@ class AuthController extends GetxController {
     update();
   }
 
+
+
+
+  addNewUser() async {
+    const String chars =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)*&1!';
+    Random random = Random();
+    String result = '';
+    final box=GetStorage();
+    for (int i = 0; i < 12; i++) {
+      result += chars[random.nextInt(chars.length)];
+    }
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(result)
+          .set({
+        'name': nameController.text,
+        'email': emailController.text,
+        'id': result,
+        'country': selectedCountry,
+      // ignore: duplicate_ignore
+      }).then((value) {
+        update();
+        // ignore: avoid_print
+        print("DONE");
+        appMessage(text: 'welcome'.tr, fail: false);
+         box.write('user_email', emailController.text);
+        box.write('user_name', nameController.text);
+        // Get.toNamed('/bottomBar');
+      });
+    } catch (e) {
+      update();
+      print(e);
+      appMessage(text: "error".tr, fail: true);
+    }
+  }
+
   addNewFreelancer() async {
+    final box=GetStorage();
     const String chars =
         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)*&1!';
     Random random = Random();
@@ -245,8 +308,11 @@ class AuthController extends GetxController {
         'country': selectedCountry,
       }).then((value) {
         update();
+        // ignore: avoid_print
         print("DONE");
         appMessage(text: 'welcome'.tr, fail: false);
+         box.write('freelancer_email', emailController.text);
+        box.write('freelancer_name', nameController.text);
         // Get.toNamed('/bottomBar');
       });
     } catch (e) {

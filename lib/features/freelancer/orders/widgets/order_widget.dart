@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/Core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/Custom_Text.dart';
@@ -5,10 +7,10 @@ import 'package:freelancerApp/features/freelancer/views/service_details_view.dar
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class ServiceCardWidget extends StatelessWidget {
+class OrderCardWidget extends StatelessWidget {
   Map<String,dynamic> data;
 
- ServiceCardWidget({super.key,required this.data});
+OrderCardWidget({super.key,required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +35,30 @@ class ServiceCardWidget extends StatelessWidget {
             child: Column(children: [
               SizedBox(
                 height: 100,
-                child:Image.network(data['image'],
-                  fit:BoxFit.cover,
+                width: MediaQuery.of(context).size.width,
+                child:Image.network(data['service_image'],
+                  fit:BoxFit.fill,
                 ),
               ),
               const SizedBox(height: 7,),
-              Custom_Text(text: data['name'],color:AppColors.textColorDark,fontSize: 15,)
+              Custom_Text(text: data['service_name'],color:AppColors.textColorDark,fontSize: 15,),
+              const SizedBox(height: 7,),
+               Row(
+                 children: [
+                   const SizedBox(width: 14,),
+                  Text('from'.tr,style: TextStyle(
+                    color:AppColors.textColorGreyMode
+                  ),),
+                  const SizedBox(width: 14,),
+                   Custom_Text(text: data['user_email'],color:AppColors.primary,fontSize: 15,),
+                 ],
+               ),
             ]),
           )
         ),
       ),
       onTap:(){
-       Get.to(ServiceDetailsView(service: data));
+       //Get.to(ServiceDetailsView(service: data));
       },
     );
   }
