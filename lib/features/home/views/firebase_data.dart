@@ -28,6 +28,7 @@ class FireBaseView extends GetView<HomeController> {
           child: SizedBox(
             height: 250,
             child: ListView.builder(
+              physics:const AlwaysScrollableScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: filteredPosts.length,
               itemBuilder: (context, index) {

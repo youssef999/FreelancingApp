@@ -22,7 +22,7 @@ PreferredSizeWidget CustomAppBar(
               Scaffold.of(context).openDrawer();
             },
             child: const Padding(
-                padding: EdgeInsets.only(left: 24, right: 24 * 0.2),
+                padding: EdgeInsets.only(left:  24 * 0.6,right:24 * 0.6),
                 child: CustomImageWidget(
                   path: 'assets/icon/drawer_menu.svg',
                   height: 17,
@@ -48,7 +48,7 @@ PreferredSizeWidget CustomAppBar(
     ),
     actions: [
       Padding(
-        padding: const EdgeInsets.only(right: 24 * 0.6),
+        padding: const EdgeInsets.only(left: 24 * 0.6,right:24 * 0.6 ),
         child:isHome ? GestureDetector(
           onTap: () {
             Get.toNamed(Routes.PROFILE);

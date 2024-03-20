@@ -13,9 +13,9 @@ class HomeController extends GetxController {
   RxList sliderImagesList = [].obs;
   CarouselSliderController sliderController = CarouselSliderController();
 
+  RxList<DocumentSnapshot> searchResults = <DocumentSnapshot>[].obs;
+  Rx<bool> isSearching = false.obs;
 
-  List<DocumentSnapshot> searchResults = [];
-  bool isSearching = false;
   final RxList<Color> colors = [
     AppColors.whiteColor,
     AppColors.whiteColor,
@@ -31,6 +31,29 @@ class HomeController extends GetxController {
     return await userRef.where('email', isEqualTo: email).get();
   }
 
+
+  Future<void> searchProducts(String keyword) async {
+    if (keyword.isEmpty) {
+      clearSearch();
+      return;
+    }
+    final QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('services')
+        .where('name', isGreaterThanOrEqualTo: keyword)
+        .get();
+        
+      searchResults.value = snapshot.docs;
+      
+print('qwe ${searchResults}');
+      isSearching.value = true;
+    update();
+  }
+
+  void clearSearch() {
+      searchResults.clear();
+      isSearching.value = false;
+   update();
+  }
   RxMap<String, dynamic>? userData = <String, dynamic>{}.obs;
   void data() async {
     final User? currentUser = FirebaseAuth.instance.currentUser;
@@ -110,32 +133,12 @@ class HomeController extends GetxController {
     });
   }
 
-  void clearSearch() {
-    searchResults.clear();
-    isSearching = false;
-  }
-
-  Future<void> searchProducts(String keyword) async {
-    if (keyword.isEmpty) {
-      clearSearch();
-      return;
-    }
-
-    final QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection('data')
-        .where('name', isGreaterThanOrEqualTo: keyword)
-        .where('name', isLessThan: '${keyword}z')
-        .get();
-
-    searchResults = snapshot.docs;
-    isSearching = true;
-  }
 
   @override
   void onInit() async {
     await fetchSliderImages();
     data();
-
+ searchResults();
     super.onInit();
   }
 }
