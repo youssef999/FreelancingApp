@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancerApp/features/freelancer/views/service_details_view.dart';
 import 'package:freelancerApp/features/home/controllers/home_controller.dart';
-import 'package:freelancerApp/features/services/views/service_details.dart';
+import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,6 +33,9 @@ class FireBaseView extends GetView<HomeController> {
               itemBuilder: (context, index) {
                 final post = filteredPosts[index];
                 return GestureDetector(
+                  onTap: (() {
+                    Get.toNamed(Routes.PRODUCT,arguments:post );
+                  }),
                     child: Row(
                   children: [
                     const SizedBox(
@@ -54,7 +56,7 @@ class FireBaseView extends GetView<HomeController> {
                               height: 180,
                               width: 150,
                               fit: BoxFit.cover,
-                              image: NetworkImage(post['image']),
+                              image: NetworkImage(  post['image'] ),
                             )),
                         Text(
                           post['name'],
@@ -65,9 +67,7 @@ class FireBaseView extends GetView<HomeController> {
                     ),
                   ],
                 ),
-                onTap:(){
-                  Get.to(OrderServiceView(data:post));
-                },
+                
                 );
               },
             ),

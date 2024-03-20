@@ -18,13 +18,11 @@ class AuthController extends GetxController {
   TextEditingController passController = TextEditingController();
   TextEditingController checkPassController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  TextEditingController roleId = TextEditingController();
   bool loading = false;
-  List<String> accountTypeList=[
-    'freelancer'.tr,
-    'user'.tr
-  ];
-  String selectAccountType='freelancer'.tr;
-
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Rx<int> isSelected = 0.obs;
 
   @override
   void onInit() async {
@@ -45,7 +43,6 @@ class AuthController extends GetxController {
 
   changeAccountType(String value) {
     final box=GetStorage();
-    selectAccountType = value;
     int roleId=0;
     if(value=='freelancer'.tr){
     roleId=0;
@@ -180,7 +177,6 @@ class AuthController extends GetxController {
   }
 
   userLogin() async {
-    Get.offAllNamed(Routes.ROOT);
     loading = true;
     update();
     final box = GetStorage();
@@ -191,11 +187,11 @@ class AuthController extends GetxController {
                 email: emailController.text, password: passController.text)
             .then((value) async {
           print("DONE");
-
+          Get.offAllNamed(Routes.ROOT);
           print("val$value");
           loading = false;
-          update();
-          box.write('email', emailController.text);
+          box.write('email', emailController.text);          update();
+
         });
       } catch (e) {
         loading = false;
@@ -214,7 +210,6 @@ class AuthController extends GetxController {
       if (emailController.text.contains('@') == false) {
         appMessage(text: 'wrongMail'.tr, fail: false);
       }
-
       if (passController.text.length < 5) {
         appMessage(text: 'wrongPass'.tr, fail: false);
       }
@@ -222,6 +217,7 @@ class AuthController extends GetxController {
   }
 
   userSignUp() async {
+    final userId = FirebaseAuth.instance.currentUser;
     loading = true;
     update();
     final box = GetStorage();
@@ -232,12 +228,26 @@ class AuthController extends GetxController {
         password: passController.text,
       )
           .then((user) async {
+        try {
+          await firestore.collection( roleId.text == '1'? 'users' : 'freelancers').add({
+            'name': nameController.text,
+            'password': passController.text,
+            'email': emailController.text,
+            'country': selectedCountry,
+            'roleId': roleId.text,
+            'type':'normal',
+            'uid': userId?.uid
+          });
+          Get.offAllNamed(Routes.LOGIN);
+        } catch (e) {
+          print(e.toString());
+          print("ERRORR");
+        }
         loading = false;
-        update();
-        addTokenToFirebase();
-         addNewUser() ;
-       // addNewFreelancer();
-       
+        
+        box.write('roleId', roleId.text);
+        box.write('email', emailController.text);
+        box.write('name', nameController.text);update();
       });
     } catch (e) {
       print(e);

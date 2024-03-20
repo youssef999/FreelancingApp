@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/custom_image_widget.dart';
@@ -10,8 +12,48 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
+class CustomDrawer extends StatefulWidget {
+   const CustomDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
+
+  String? roleId;
+      @override
+  void initState() {  var box = GetStorage();
+         roleId = box.read('roleId');
+             data();
+    super.initState();
+  } 
+ 
+  Future<QuerySnapshot<Map<String, dynamic>>> getUserDataByEmail(
+      String email) async {
+        print(roleId);
+    final userRef = FirebaseFirestore.instance.collection(roleId == '1' ? 'users':'freelancers');
+    return await userRef.where('email', isEqualTo: email).get();
+  }
+
+  Map<String, dynamic>? userData;
+
+  void data() async {
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    final String? email = currentUser?.email;
+
+    if (email != null) {
+      final snapshot = await getUserDataByEmail(email);
+      if (snapshot.docs.isNotEmpty) {
+        setState(() {
+          userData = snapshot.docs.first.data();
+        });
+      }
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +103,8 @@ class CustomDrawer extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             fit: BoxFit.cover,
-            image: const NetworkImage(
-              '',
+            image:  NetworkImage(
+              userData?['image'] ?? '',
             ),
             placeholder: const AssetImage(
               'assets/images/user.png',
@@ -87,7 +129,7 @@ class CustomDrawer extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Username',
+            userData?['name'] ?? 'Username',
             textAlign: TextAlign.start,
             style: GoogleFonts.cairo(
               fontSize: 17,
@@ -96,7 +138,7 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           Text(
-            'Email@gmail.com',
+            userData?['email'] ?? 'email@gmail.com',
             textAlign: TextAlign.start,
             style: GoogleFonts.cairo(
               fontSize: 17,
@@ -114,7 +156,7 @@ class CustomDrawer extends StatelessWidget {
 
   _drawerWidget(BuildContext context) {
     final box=GetStorage();
-    int roleId=box.read('roleId');
+    var roleId=box.read('roleId');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,

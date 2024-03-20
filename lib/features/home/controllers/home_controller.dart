@@ -13,6 +13,7 @@ class HomeController extends GetxController {
   RxList sliderImagesList = [].obs;
   CarouselSliderController sliderController = CarouselSliderController();
 
+
   List<DocumentSnapshot> searchResults = [];
   bool isSearching = false;
   final RxList<Color> colors = [
@@ -42,6 +43,8 @@ class HomeController extends GetxController {
           print('BBBBBBBBBBBBBBBBBBBBB ${snapshot.docs.first.data()}');
         }
         userData?.value = snapshot.docs.first.data();
+        box.write('roleId',userData?['roleId']);
+        print('cccoccoooo');
         update();
       }
     }
@@ -132,6 +135,7 @@ class HomeController extends GetxController {
   void onInit() async {
     await fetchSliderImages();
     data();
+
     super.onInit();
   }
 }
