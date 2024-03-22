@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
+import 'package:get/get.dart';
 
 
 class CustomTextFormField extends StatefulWidget {
@@ -84,10 +85,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   widget.obs = !widget.obs;
                 });
               }),
-                          hintText: 'Password',
+                          hintText: 'password'.tr,
                           hintStyle: const TextStyle(color: Colors.grey),
                           labelStyle: const TextStyle(color: Colors.grey),
-                          labelText: 'Password',
+                        //  labelText: 'Password',
                           focusColor: AppColors.whiteColor),
                     );
       
@@ -133,7 +134,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                           hintText: widget.hint,
                           hintStyle: const TextStyle(color: Colors.grey),
                           labelStyle: const TextStyle(color: Colors.grey),
-                          labelText: widget.hint),
+                        //  labelText: widget.hint
+                          ),
                       cursorColor: AppColors.darkColor,
                     );
       }
@@ -168,7 +170,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                               borderRadius: BorderRadius.circular(20)),
                           focusedBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
-                                  width: 3, color: AppColors.secondaryDarkColor),
+                                  width: 1, color: AppColors.secondaryDarkColor),
                               borderRadius: BorderRadius.circular(20)),
                           // enabledBorder: OutlineInputBorder(
                           //     borderSide: const BorderSide(
@@ -180,8 +182,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                           ),
                           hintText: widget.hint,
                           hintStyle: const TextStyle(color: Colors.grey),
-                          labelStyle: const TextStyle(color: Colors.grey),
-                          labelText: widget.hint),
+                     //     labelStyle: const TextStyle(color: Colors.grey),
+                          //labelText: widget.hint
+                          ),
                       cursorColor: AppColors.darkColor,
                     );
       }

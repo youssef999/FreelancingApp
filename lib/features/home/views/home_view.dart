@@ -86,7 +86,7 @@ class HomeView extends GetView<HomeController> {
                                 title: Text(product['name'],style: GoogleFonts.cairo(),),
                                 trailing: Image.network(product['image'],width: 100,),
                                 onTap: () {
-                                  Get.toNamed(Routes.PRODUCT,arguments: document);
+                                  Get.toNamed(Routes.SERVICEDETAILS,arguments: document);
                                 },
                               ),
                             );

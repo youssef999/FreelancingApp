@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
-import 'package:freelancerApp/features/freelancer/controllers/freelancer_services_controller.dart';
-import 'package:freelancerApp/features/freelancer/widgets/service_card_widget.dart';
+import 'package:freelancerApp/features/freelancer/service/controllers/freelancer_services_controller.dart';
+
 import 'package:get/get.dart';
+
+import '../widgets/service_card_widget.dart';
 
 
 

@@ -10,7 +10,7 @@ import 'package:freelancerApp/features/profile/view/profile_view.dart';
 import 'package:freelancerApp/features/root/binding/root_binding.dart';
 import 'package:freelancerApp/features/root/view/root_view.dart';
 import 'package:freelancerApp/features/services/binding/product_binding.dart';
-import 'package:freelancerApp/features/services/views/product_view.dart';
+import 'package:freelancerApp/features/services/views/service_details_view.dart';
 import 'package:freelancerApp/features/splash/splash_view.dart';
 import 'package:freelancerApp/features/users/binding/users_binding.dart';
 import 'package:freelancerApp/features/users/views/users_view.dart';
@@ -25,8 +25,8 @@ class Theme1AppPages {
     GetPage(name: Routes.HOME, page: () => HomeView(), binding: HomeBinding()),
     GetPage(name: Routes.ROOT, page: () => RootView(), binding: RootBinding()),    GetPage(name: Routes.PROFILE, page: () => ProfileView(), binding: ProfileBinding()),
     GetPage(
-        name: Routes.PRODUCT,
-        page: () => const ProductView(),
+        name: Routes.SERVICEDETAILS,
+        page: () => const ServiceDetailsView(),
         binding: ProductBinding()),
     GetPage(
         name: Routes.LOGIN,

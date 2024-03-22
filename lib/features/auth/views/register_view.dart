@@ -29,8 +29,8 @@ class SignUpView extends GetView<AuthController> {
                       fontWeight: FontWeight.bold,
                       color: AppColors.secondaryLightColor,
                     )),
-                const Text('انشيء حساب جديد',
-                    style: TextStyle(
+                 Text('createNewAccount'.tr,
+                    style: const TextStyle(
                         fontSize: 15,
                         color: AppColors.primaryDarkColor,
                         fontFamily: 'Hind'))
@@ -56,7 +56,7 @@ class SignUpView extends GetView<AuthController> {
                                   controller.roleId.text = '1';
                                 },
                                 style: controller.isSelected.value == 1
-                                    ? ButtonStyle( side: MaterialStateProperty.all(BorderSide(width: 1,color: Colors.white)),
+                                    ? ButtonStyle( side: MaterialStateProperty.all(const BorderSide(width: 1,color: Colors.white)),
                                         backgroundColor:
                                             MaterialStatePropertyAll(
                                                 AppColors.darkColor))
@@ -65,7 +65,7 @@ class SignUpView extends GetView<AuthController> {
                                             MaterialStatePropertyAll(
                                                 AppColors.whiteColor)),
                                 child: Text(
-                                  'User',
+                                  'user'.tr,
                                   style: controller.isSelected.value == 1
                                       ? const TextStyle(color: Colors.white)
                                       : const TextStyle(color: Colors.black),
@@ -83,7 +83,7 @@ class SignUpView extends GetView<AuthController> {
                                 },
                                 style: controller.isSelected.value == 0
                                     ? ButtonStyle(
-                                      side: MaterialStateProperty.all(BorderSide(width: 1,color: Colors.white)),
+                                      side: MaterialStateProperty.all(const BorderSide(width: 1,color: Colors.white)),
                                         backgroundColor:
                                             MaterialStatePropertyAll(
                                                 AppColors.darkColor))
@@ -92,7 +92,7 @@ class SignUpView extends GetView<AuthController> {
                                             MaterialStatePropertyAll(
                                                 AppColors.whiteColor)),
                                 child: Text(
-                                  'Freelancer',
+                                  'freelancer'.tr,
                                   style: controller.isSelected.value == 0
                                       ? const TextStyle(color: Colors.white)
                                       : const TextStyle(color: Colors.black),
@@ -137,10 +137,10 @@ class SignUpView extends GetView<AuthController> {
                             Icons.account_circle_outlined,
                             color: AppColors.darkColor,
                           ),
-                          hintText: 'User Name',
+                          hintText: 'userName'.tr,
                           hintStyle: const TextStyle(color: Colors.black),
                           labelStyle: const TextStyle(color: Colors.black),
-                          labelText: 'User Name'),
+                          labelText: 'userName'.tr),
                       cursorColor: AppColors.darkColor,
                     ),
                     const SizedBox(
@@ -179,10 +179,10 @@ class SignUpView extends GetView<AuthController> {
                             Icons.email,
                             color: AppColors.darkColor,
                           ),
-                          hintText: 'Email',
+                          hintText: 'email'.tr,
                           hintStyle: const TextStyle(color: Colors.black),
                           labelStyle: const TextStyle(color: Colors.black),
-                          labelText: 'Email',
+                          labelText: 'email'.tr,
                           focusColor: AppColors.whiteColor),
                     ),
                     const SizedBox(
@@ -223,10 +223,10 @@ class SignUpView extends GetView<AuthController> {
                             Icons.admin_panel_settings_sharp,
                             color: AppColors.darkColor,
                           ),
-                          hintText: 'Password',
+                          hintText: 'password'.tr,
                           hintStyle: const TextStyle(color: Colors.black),
                           labelStyle: const TextStyle(color: Colors.black),
-                          labelText: 'Password',
+                          labelText: 'password'.tr,
                           focusColor: AppColors.whiteColor),
                     ),
                     const SizedBox(
@@ -286,9 +286,10 @@ class SignUpView extends GetView<AuthController> {
                             Row(
                               children: [
                                 Custom_Text(
-                                  text: 'Country'.tr,
+                                  text: 'country'.tr,
                                   fontSize: 16,
-                                  color: AppColors.textColorDark,
+                                  color: AppColors.textColorLight,
+                                  fontWeight:FontWeight.w500,
                                 ),
                               ],
                             ),
@@ -337,9 +338,9 @@ class SignUpView extends GetView<AuthController> {
                                   width: 0.1, color: AppColors.darkColor),
                               borderRadius: BorderRadius.circular(10)),
                           backgroundColor: AppColors.whiteColor),
-                      child: const Text(
-                        "Register",
-                        style: TextStyle(
+                      child:  Text(
+                        "register".tr,
+                        style: const TextStyle(
                           color: AppColors.primaryDarkColor,
                         ),
                         textAlign: TextAlign.center,

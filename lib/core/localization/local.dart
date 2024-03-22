@@ -14,8 +14,16 @@ class MyLocal implements Translations{
           "freelancer":"عامل حر",
             "selectAccType":"اختر نوع الحساب ",
 
-          "user":'مستخدم',
+             "changeStatusDone":"تم تغيير حالة الطلب ",
 
+          "user":'مستخدم',
+          "myServices":"خدماتي",
+          "orderRequests":"الطلبات المرسلة ",
+          "addNewService":"اضف خدمة جديدة",
+          "myOrders":"طلباتي ",
+
+
+           "startFrom":"سعر الخدمة يبدا من : ",
 
           "servicePrice":"سعر الخدمة",
           "serviceUpdate":"تم تعديل الخدمة",
@@ -36,7 +44,49 @@ class MyLocal implements Translations{
 
  "selectCountry":"اختر الدولة",
 
- "from":"طلبت الخدمة من : "
+ "from":"طلبت الخدمة من : ",
+
+
+          "date":"تاريخ الطلب ",
+          "taskTime":"المدة المتوقعة ",
+          "price":"سعر الطلب ",
+          "status":"حالة الطلب ",
+          "refuse":"رفض ",
+          "accept":"موافقة ",
+    
+
+          "editDataAndSendToClient":"تعديل بيانات اساسية بالصفقة  ",
+
+          "updateData":"تعديل البيانات ",
+
+           "buyService":" اشتري الخدمة ",
+
+           "userName":"الاسم ",
+
+           "services":"الخدمات",
+
+
+
+             "country":"البلد",
+
+             "pending":"بانتظار الموافقة",
+             "chat":"الدردشة",
+             "approved":"تمت الموافقة",
+             "declined":"تم الرفض",
+
+             "send":"ارسال",
+
+
+          
+
+           "forgotPassword":"نسيت كلمة المرور",
+
+           "dontHaveAccount":'ليس لديك حساب؟',
+
+           'or':"او",
+
+           "notes":"ملاحظات عن الصفقة ",
+              "orderChangedSentToClient":"تم ارسال تعديلات الصفقة للعميل ",
 
 
         },
@@ -44,6 +94,49 @@ class MyLocal implements Translations{
         
         "en":{
 
+  "notes":"Notes ",
+
+  "date":"Date",
+          "taskTime":"expected time",
+          "orderChangedSentToClient":"Changes sent to client",
+          "price":"Order Price",
+          "status":"Status",
+          "refuse":"Refuse",
+          "accept":"Accept",
+          "edit":'Edit',
+
+           "startFrom":" Starts From : ",
+
+             "userName":" Name",
+
+             "country":"Country",
+
+             "chat":"Chat",
+
+
+           "buyService":"Buy Service ",
+
+
+            "pending":"Pending",
+             "approved":"Approved",
+             "declined":"Declined",
+
+
+
+           "forgotPassword":"Forgot Password",
+
+           "dontHaveAccount":'Don\'t have an account?',
+
+           'or':"OR",
+
+
+           
+
+
+          "myServices":"My Service ",
+          "orderRequests":"Order Request ",
+          "addNewService":"Add New Service ",
+          "myOrders":"My Orders ",
            "serviceName":"Service Name",
            "editServiceImage":"Edit Service Image",
           "servicePrice":"Service Price",
@@ -57,14 +150,23 @@ class MyLocal implements Translations{
           "login":'Login',
           "register":'Register',
           "addServiceImage":"Add Service Image",
-           "edit":"Edit",
+          "changeStatusDone":"Order Status Changed",
+
+          "send":'Send',
+
+          "services":"Services",
+        
             "delete":"Delete",
             "add":"Add",
             "selectCountry":"Select Country",
              "freelancer":"Freelancer",
           "user":'User',
           "selectAccType":"Select Account Type",
-          "from":"Service requested from : "
+          "from":"Service requested from : ",
+
+          "editDataAndSendToClient":"Edit Data And Send To Client",
+          "updateData":"Update Data",
+
 
         }
       };

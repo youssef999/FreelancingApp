@@ -4,11 +4,11 @@ import 'package:freelancerApp/core/const/constant.dart';
 import 'package:freelancerApp/core/widgets/Custom_Text.dart';
 import 'package:freelancerApp/core/widgets/Custom_button.dart';
 import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
-import 'package:freelancerApp/features/freelancer/controllers/add_services_controller.dart';
-import 'package:freelancerApp/features/freelancer/views/edit_service.dart';
+import 'package:freelancerApp/features/freelancer/service/controllers/add_services_controller.dart';
+import 'package:freelancerApp/features/freelancer/service/views/edit_service.dart';
 import 'package:get/get.dart';
 
-import '../../../core/resources/app_colors.dart';
+import '../../../../core/resources/app_colors.dart';
 
 // ignore: must_be_immutable
 class ServiceDetailsView extends StatelessWidget {
@@ -34,7 +34,7 @@ class ServiceDetailsView extends StatelessWidget {
               children: [
                 Custom_Text(text: service['name'],color:AppColors.textColorDark,fontSize: 15,),
               const SizedBox(height: 7,),
-          Custom_Text(text: service['details'],color:AppColors.textColorGreyMode,fontSize: 15,),
+          Custom_Text(text: service['description'],color:AppColors.textColorGreyMode,fontSize: 15,),
            const SizedBox(height: 7,),
            Row(
             mainAxisAlignment:MainAxisAlignment.center,

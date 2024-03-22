@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:freelancerApp/features/freelancer/freelancer/views/freelancer_details_view.dart';
 import 'package:freelancerApp/features/home/controllers/home_controller.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,20 @@ class FireBaseView extends GetView<HomeController> {
                 final post = filteredPosts[index];
                 return GestureDetector(
                   onTap: (() {
-                    Get.toNamed(Routes.PRODUCT,arguments:post );
+                    //freelancer
+                    if(collection=='freelancers'){
+                      print("here");
+
+Get.to(FreelancerDetailsView(
+  data: post,
+));
+                    }
+                    else {
+                      
+      Get.toNamed(Routes.SERVICEDETAILS,arguments:post );
+                
+                    }
+                   
                   }),
                     child: Row(
                   children: [

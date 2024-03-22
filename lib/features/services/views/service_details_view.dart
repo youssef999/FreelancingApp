@@ -6,8 +6,8 @@ import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductView extends GetView<ProductController> {
-  const ProductView({super.key});
+class ServiceDetailsView extends GetView<ProductController> {
+  const ServiceDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +41,16 @@ class ProductView extends GetView<ProductController> {
                     const SizedBox(
                       height: 5,
                     ),
-                    txtS('Price', 'Hind', 20, FontWeight.normal, Colors.black),
+                    txtS('price'.tr, 'Hind', 20, FontWeight.normal, Colors.black),
                     Row(
                       children: [
-                        txtS('starts from', 'Hind', 15, FontWeight.normal,
+                        txtS('startFrom'.tr, 'Hind', 15, FontWeight.normal,
                             Colors.black),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         txtT('price', 'Thasadith', 40, FontWeight.w900,
-                            Colors.green),
+                            AppColors.primary),
                         txtS('\$', 'Hind', 20, FontWeight.normal, Colors.black)
                       ],
                     ),
@@ -58,8 +58,8 @@ class ProductView extends GetView<ProductController> {
                       height: 10,
                     ),
                     dvid(30),
-                    txtS('About This Item', 'Hind', 22, FontWeight.w300,
-                        Colors.black45),
+                    // txtS('About This Item', 'Hind', 22, FontWeight.w300,
+                    //     Colors.black45),
                     Text(controller.posts?['description'],
                         textAlign: TextAlign.center,
                         style: GoogleFonts.cairo(
@@ -68,7 +68,7 @@ class ProductView extends GetView<ProductController> {
                           color: Colors.black,
                         )),
                     dvid(60),
-                    txtS('Freelancer', 'Hind', 20, FontWeight.w900,
+                    txtS('freelancer'.tr, 'Hind', 20, FontWeight.w900,
                         Colors.black),
                     GestureDetector(
                       onTap: () {},
@@ -134,7 +134,7 @@ class ProductView extends GetView<ProductController> {
         ),
         bottomSheet: animBtn(() {
           Get.toNamed(Routes.CART);
-        }, 'اشتري الخدمة', Colors.green));
+        }, 'buyService'.tr, AppColors.primary));
   }
 
   txtT(dynamic txt, String style, double size, FontWeight w, Color color) {

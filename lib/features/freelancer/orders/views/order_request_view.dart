@@ -7,8 +7,8 @@ import 'package:freelancerApp/features/freelancer/orders/controllers/order_contr
 import 'package:freelancerApp/features/freelancer/orders/widgets/order_widget.dart';
 import 'package:get/get.dart';
 
-class OrdersView extends GetView<OrderController> {
-  const OrdersView({super.key});
+class OrderRequestView extends GetView<OrderController> {
+  const OrderRequestView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class OrderWidgetFromFirebase extends StatelessWidget {
           shrinkWrap: true,
           itemCount:controller.orderList.length,
           itemBuilder: (context, index) {
-        return OrderCardWidget(data:controller.orderList[index]);
+        return OrderCardWidget(data:controller.orderList[index],controller:controller);
         });
       }
     );

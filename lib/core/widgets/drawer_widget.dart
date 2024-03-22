@@ -1,59 +1,20 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/custom_image_widget.dart';
-import 'package:freelancerApp/features/freelancer/orders/views/order_view.dart';
-import 'package:freelancerApp/features/freelancer/views/add_service_view.dart';
+import 'package:freelancerApp/features/chat/views/chat_view.dart';
+import 'package:freelancerApp/features/freelancer/orders/views/order_request_view.dart';
+import 'package:freelancerApp/features/freelancer/service/views/add_service_view.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomDrawer extends StatefulWidget {
-   const CustomDrawer({Key? key}) : super(key: key);
+import '../../features/freelancer/service/views/freelancer_services.dart';
 
-  @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
-}
-
-class _CustomDrawerState extends State<CustomDrawer> {
-
-  String? roleId;
-      @override
-  void initState() {  var box = GetStorage();
-         roleId = box.read('roleId');
-             data();
-    super.initState();
-  } 
- 
-  Future<QuerySnapshot<Map<String, dynamic>>> getUserDataByEmail(
-      String email) async {
-        print(roleId);
-    final userRef = FirebaseFirestore.instance.collection(roleId == '1' ? 'users':'freelancers');
-    return await userRef.where('email', isEqualTo: email).get();
-  }
-
-  Map<String, dynamic>? userData;
-
-  void data() async {
-    final User? currentUser = FirebaseAuth.instance.currentUser;
-    final String? email = currentUser?.email;
-
-    if (email != null) {
-      final snapshot = await getUserDataByEmail(email);
-      if (snapshot.docs.isNotEmpty) {
-        setState(() {
-          userData = snapshot.docs.first.data();
-        });
-      }
-    }
-  }
-
-
-
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +64,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
             height: double.infinity,
             width: double.infinity,
             fit: BoxFit.cover,
-            image:  NetworkImage(
-              userData?['image'] ?? '',
+            image: const NetworkImage(
+              '',
             ),
             placeholder: const AssetImage(
               'assets/images/user.png',
@@ -129,7 +90,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
       child: Column(
         children: [
           Text(
-            userData?['name'] ?? 'Username',
+            'Username',
             textAlign: TextAlign.start,
             style: GoogleFonts.cairo(
               fontSize: 17,
@@ -138,7 +99,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ),
           ),
           Text(
-            userData?['email'] ?? 'email@gmail.com',
+            'Email@gmail.com',
             textAlign: TextAlign.start,
             style: GoogleFonts.cairo(
               fontSize: 17,
@@ -156,31 +117,47 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   _drawerWidget(BuildContext context) {
     final box=GetStorage();
-    var roleId=box.read('roleId');
+    String roleId=box.read('roleId')??'x';
+    // ignore: prefer_interpolation_to_compose_strings
+    print("ROLEID==="+roleId);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        (roleId=='2')?
         _drawerTileWidget(
           icon: 'assets/icon/kyc_verification.svg',
-          title: 'المستخدمين',
+          title: 'myServices'.tr,
           onTap: () {
-            Get.to(const OrdersView());
+            Get.to(const FreelancerServicesView());
           },
-        ),
-        (roleId==0)?
+        )
+        :const SizedBox(),
+       (roleId=='2')?
+        _drawerTileWidget(
+          icon: 'assets/icon/kyc_verification.svg',
+          title: 'orderRequests'.tr,
+          onTap: () {
+            Get.to(const OrderRequestView());
+          }
+       ):const SizedBox(),
+       (roleId=='2')?
         _drawerTileWidget(
           icon: 'assets/icon/transactions_log.svg',
-          title: 'اضف خدمة جديدة',
+          title: 'addNewService'.tr,
           onTap: () {
             Get.to(const AddServicesView());
           },
-        ):const SizedBox(),
+        )
+        :const SizedBox(),
 
         _drawerTileWidget(
           icon: 'assets/icon/change_password.svg',
-          title: 'اعدادات',
-          onTap: () {},
+          title: 'myOrders'.tr,
+          onTap: () {
+            Get.to(const ChatScreen());
+          },
         ),
         _drawerTileWidget(
           icon: 'assets/icon/help_center.svg',

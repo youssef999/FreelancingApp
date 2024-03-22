@@ -1,10 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/widgets/custom_textformfield.dart';
 import 'package:freelancerApp/features/auth/controllers/auth_controller.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../core/resources/app_colors.dart';
 
 class LoginView extends GetView<AuthController> {
@@ -71,15 +72,20 @@ class LoginView extends GetView<AuthController> {
                                   width: 0.1, color: AppColors.darkColor),
                               borderRadius: BorderRadius.circular(10)),
                           backgroundColor: AppColors.whiteColor),
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(
+                      child:  Text(
+                        "login".tr,
+                        style: const TextStyle(
                           color: AppColors.primaryDarkColor,
                         ),
                         textAlign: TextAlign.center,
                       ),
                       onPressed: () {
+
+                      controller.getRoleIdByUser().then((value) {
                         controller.userLogin();
+                        
+                      });
+                        
                       },
                     ),
                     Row(
@@ -93,7 +99,7 @@ class LoginView extends GetView<AuthController> {
                               print("heeee");
                             },
                             child: Text(
-                              'Forgot\n Password ?',
+                              'forgotPassword'.tr,
                               style: TextStyle(color: AppColors.darkColor),
                             )),
                       ],
@@ -103,7 +109,7 @@ class LoginView extends GetView<AuthController> {
                     ),
                     Center(
                         child: Text(
-                      'or',
+                      'or'.tr,
                       style:
                           TextStyle(color: AppColors.darkColor, fontSize: 20),
                     )),
@@ -111,7 +117,7 @@ class LoginView extends GetView<AuthController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account ?",
+                          "dontHaveAccount".tr,
                           style: TextStyle(
                               fontSize: 15, color: AppColors.darkColor),
                         ),
@@ -119,10 +125,10 @@ class LoginView extends GetView<AuthController> {
                           onPressed: () {
                             Get.toNamed(Routes.REGISTER);
                           },
-                          child: const Expanded(
+                          child:  Expanded(
                             child: Text(
-                              'Register',
-                              style: TextStyle(
+                              'register'.tr,
+                              style: const TextStyle(
                                   fontSize: 30,
                                   color: AppColors.secondaryLightColor),
                             ),

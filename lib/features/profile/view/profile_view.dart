@@ -41,39 +41,42 @@ class ProfileView extends GetView<ProfileController> {
             ),
             txt('اسم المستخدم', controller.userData?['name'] ?? '', (p0) {}),
             txt('الايميل', controller.userData?['email'] ?? '', (p0) {}),
-            txt('رقم الهاتف', controller.userData?['phone'] ?? '', (p0) {}),
+           // txt('رقم الهاتف', controller.userData?['phone'] ?? '', (p0) {}),
             txt('بلد المنشيء', controller.userData?['country'] ?? '', (p0) {}),
-            txt('رمز الدخول', '***********', (p0) {}),
+            //txt('رمز الدخول', '***********', (p0) {}),
             const SizedBox(
-              height: 80,
+              height: 50,
             )
           ]);
         }),
-        bottomSheet: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 50,
-                margin: const EdgeInsets.only(bottom: 10, top: 10),
-                width: 250,
-                decoration: const BoxDecoration(
-                  color: AppColors.primaryLightColor,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
+        bottomSheet: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: 50,
+                  margin: const EdgeInsets.only(bottom: 10, top: 10),
+                  width: 250,
+                  decoration: const BoxDecoration(
+                    color: AppColors.primaryLightColor,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'تعديل',
+                      style: GoogleFonts.cairo(color: Colors.white, fontSize: 20),
+                    ),
                   ),
                 ),
-                child: Center(
-                  child: Text(
-                    'تعديل',
-                    style: GoogleFonts.cairo(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ));
   }
 

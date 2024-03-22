@@ -14,10 +14,13 @@ class CartView extends GetView<CartController> {
       appBar: CustomAppBar('Cart', context, false),
       body: Scaffold(
           backgroundColor: AppColors.mainly,
-          body: ListView(
-            children: [
-
-            ],
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView(
+              children: [
+            
+              ],
+            ),
           )),
     );
   }

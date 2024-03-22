@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/Core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/Custom_Text.dart';
-import 'package:freelancerApp/features/freelancer/views/service_details_view.dart';
+import 'package:freelancerApp/features/freelancer/service/views/service_details_view.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable

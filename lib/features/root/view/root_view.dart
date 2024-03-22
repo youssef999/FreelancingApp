@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/bottom_navber.dart';
 import 'package:freelancerApp/core/widgets/drawer_widget.dart';
+import 'package:freelancerApp/core/widgets/drawer_widget2.dart';
 import 'package:freelancerApp/features/root/controller/root_controller.dart';
 import 'package:get/get.dart';
 

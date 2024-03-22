@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 import '../../../../Core/const/app_message.dart';
 
 class AuthController extends GetxController {
@@ -18,7 +17,9 @@ class AuthController extends GetxController {
   TextEditingController passController = TextEditingController();
   TextEditingController checkPassController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+
   TextEditingController roleId = TextEditingController();
+
   bool loading = false;
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -41,17 +42,73 @@ class AuthController extends GetxController {
   String selectedItem = 'ترجمة';
   String selectedCountry = 'مصر';
 
-  changeAccountType(String value) {
-    final box=GetStorage();
-    int roleId=0;
-    if(value=='freelancer'.tr){
-    roleId=0;
-    }
-    else{
-      roleId=1;
-    }
-    update();
-    box.write('roleId', roleId);
+  List<Map<String,dynamic>> userDataList=[];
+ List<Map<String,dynamic>> freelancerDataList=[];
+ final box=GetStorage();
+
+  getRoleIdByUser() async{
+userDataList=[];
+QuerySnapshot querySnapshot =
+      await FirebaseFirestore.instance.collection
+        ('users').where('email',isEqualTo: emailController.text).get();
+      try{
+        List<Map<String, dynamic>> data
+        = querySnapshot.docs.map((DocumentSnapshot doc) =>
+        doc.data() as Map<String, dynamic>).toList();
+        userDataList=data;
+        if(userDataList.isNotEmpty){
+          roleId.text='1';
+          box.write('roleId',roleId.text);
+        }else{
+   getRoleIdByFreelancer();
+        }
+
+
+     
+      }catch(e){
+        // ignore: avoid_print
+        print("E.......");
+        // ignore: avoid_print
+        print(e);
+     
+        print("E.......");
+      }
+      update();
+
+  }
+
+  getRoleIdByFreelancer()async{
+
+freelancerDataList=[];
+QuerySnapshot querySnapshot =
+      await FirebaseFirestore.instance.collection
+        ('freelancers').where('email',isEqualTo: emailController.text).get();
+      try{
+        List<Map<String, dynamic>> data
+        = querySnapshot.docs.map((DocumentSnapshot doc) =>
+        doc.data() as Map<String, dynamic>).toList();
+        freelancerDataList=data;
+        if(freelancerDataList.isNotEmpty){
+          roleId.text='2';
+          box.write('roleId',roleId.text);
+        }
+        else{
+          print("ELSE");
+          
+        }
+
+
+     
+      }catch(e){
+        // ignore: avoid_print
+        print("E.......");
+        // ignore: avoid_print
+        print(e);
+     
+        print("E.......");
+      }
+      update();
+
   }
 
   changeCatValue(String value) {
@@ -228,8 +285,11 @@ class AuthController extends GetxController {
         password: passController.text,
       )
           .then((user) async {
+
+          
         try {
-          await firestore.collection( roleId.text == '1'? 'users' : 'freelancers').add({
+          await firestore.collection(
+            roleId.text == '1'? 'users' : 'freelancers').add({
             'name': nameController.text,
             'password': passController.text,
             'email': emailController.text,
@@ -244,7 +304,6 @@ class AuthController extends GetxController {
           print("ERRORR");
         }
         loading = false;
-        
         box.write('roleId', roleId.text);
         box.write('email', emailController.text);
         box.write('name', nameController.text);update();

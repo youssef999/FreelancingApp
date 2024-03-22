@@ -9,14 +9,15 @@ class AppColors {
   static Color cardColor =  Colors.white;
   //Color(0xffececec);
   static Color cardColor2 = Colors.white;
-  static Color backgroundColor = const Color(0xffececec);
+  static Color backgroundColor = Colors.grey[200]!;
   static Color appBarColor = const Color(0xff041CB4);
   static Color iconColor = AppColors.primary;
   static Color lightColor = Colors.white;
   static Color darkColor = Colors.black;
-  static Color greyColor = const Color.fromARGB(255, 211, 211, 211);
+  static Color greyColor = Colors.black.withOpacity(0.8);
+  //const Color.fromARGB(255, 211, 211, 211);
   static const Color primaryLightColor = Color(0xFF635BFE);
-  static Color buttonColor = const Color(0xFF8358FF);
+  static Color buttonColor =  Color(0xFF8358FF);
   static Color buttonColor2 = Colors.white;
 
   static Color textColorLight = Colors.white;
