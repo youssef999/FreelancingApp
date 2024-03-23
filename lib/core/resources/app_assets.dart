@@ -5,6 +5,7 @@ const String jsonPath = "assets/json";
 
 class AppAssets {
   static const String logo = '$imagePath/logo.jpeg';
+ static const String chatIcon='assets/images/chat.webp';
 }
 
 class JsonAssets {

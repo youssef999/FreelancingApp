@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/Custom_button.dart';
+import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
 import 'package:freelancerApp/core/widgets/custom_textformfield.dart';
 import 'package:freelancerApp/features/freelancer/service/controllers/add_services_controller.dart';
 import 'package:get/get.dart';
@@ -35,6 +36,7 @@ controller.getAllCategories();
     
     return Scaffold(
       backgroundColor:AppColors.backgroundColor,
+      appBar:CustomAppBar('', context, false),
       body:Padding(
         padding: const EdgeInsets.all(5.0),
         child: GetBuilder<AddServiceController>(

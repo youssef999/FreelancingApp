@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
 import 'package:freelancerApp/core/widgets/custom_app_bar.dart';
+import 'package:freelancerApp/features/chat/views/chat_view.dart';
+import 'package:freelancerApp/features/checkout/views/checkout_view.dart';
 import 'package:freelancerApp/features/services/controllers/product_controller.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -114,7 +116,9 @@ class ServiceDetailsView extends GetView<ProductController> {
                               width: 10,
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                 // Get.to(const ChatView());
+                                },
                                 icon: const Icon(
                                   Icons.chat,
                                   color: AppColors.primaryDarkColor,
@@ -133,7 +137,10 @@ class ServiceDetailsView extends GetView<ProductController> {
           ),
         ),
         bottomSheet: animBtn(() {
-          Get.toNamed(Routes.CART);
+
+                Get.to( CheckOutView(data: controller.posts!));
+
+          //Get.toNamed(Routes.CART);
         }, 'buyService'.tr, AppColors.primary));
   }
 

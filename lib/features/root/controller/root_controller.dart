@@ -7,6 +7,8 @@ import 'package:freelancerApp/features/root/view/secound.dart';
 import 'package:freelancerApp/features/root/view/third.dart';
 import 'package:get/get.dart';
 
+import '../../chat/views/all_chats_view.dart';
+
 class RootController extends GetxController {
   RxInt selectedIndex = 0.obs;
   List page = [
@@ -15,9 +17,9 @@ class RootController extends GetxController {
       SecondScreen(),
     // const AddServicesView(),
      const FreelancerServicesView(),
-  
+  const AllChatsView(),
     //const ForthScreen(),
-    const FifthScreen()
+   // const FifthScreen()
   ];
   void selectedPage(int index) {
     selectedIndex.value = index;

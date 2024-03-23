@@ -17,6 +17,7 @@ class ShowServiceDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar:CustomAppBar('', context, false),
       body:Padding(

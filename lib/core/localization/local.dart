@@ -16,6 +16,9 @@ class MyLocal implements Translations{
 
              "changeStatusDone":"تم تغيير حالة الطلب ",
 
+      "dealSent":"تم ارسال الصفقة بنجاح",
+
+
           "user":'مستخدم',
           "myServices":"خدماتي",
           "orderRequests":"الطلبات المرسلة ",
@@ -60,6 +63,10 @@ class MyLocal implements Translations{
           "updateData":"تعديل البيانات ",
 
            "buyService":" اشتري الخدمة ",
+
+           "des":"   وصف الصفقة بالتفصيل", 
+           "avgTime":"مدة التنفيذ المتوقعة ",
+           "sendOffer":"ارسل الصفقة الان ",
 
            "userName":"الاسم ",
 
@@ -128,6 +135,13 @@ class MyLocal implements Translations{
            "dontHaveAccount":'Don\'t have an account?',
 
            'or':"OR",
+
+            "des":" descripe the deal in detail", 
+           "avgTime":" Expected Execution Time ",
+           "sendOffer":"Send Offer ",
+
+           "dealSent":"Deal Sent ",
+
 
 
            

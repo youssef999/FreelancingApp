@@ -6,6 +6,7 @@ import 'package:freelancerApp/core/widgets/custom_image_widget.dart';
 import 'package:freelancerApp/features/chat/views/chat_view.dart';
 import 'package:freelancerApp/features/freelancer/orders/views/order_request_view.dart';
 import 'package:freelancerApp/features/freelancer/service/views/add_service_view.dart';
+import 'package:freelancerApp/features/orders/views/myorder_view.dart';
 import 'package:freelancerApp/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -156,7 +157,8 @@ class CustomDrawer extends StatelessWidget {
           icon: 'assets/icon/change_password.svg',
           title: 'myOrders'.tr,
           onTap: () {
-            Get.to(const ChatScreen());
+            Get.to( const MyOrderView());
+           // Get.to(const ChatView());
           },
         ),
         _drawerTileWidget(

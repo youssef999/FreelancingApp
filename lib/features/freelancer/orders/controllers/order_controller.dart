@@ -26,11 +26,11 @@ TextEditingController noteController =TextEditingController();
 getFreelancerOrders() async{
   final box=GetStorage();
   // ignore: unused_local_variable
-  String email=box.read('freelancer_email')??'';
+  String email=box.read('email')??'';
     orderList= [];
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('orders')
-        .where('freelancer_email',isEqualTo: 'test@gmail.com')
+        .where('client_email',isEqualTo: email)
         .get();
     try {
       List<Map<String, dynamic>> data = querySnapshot.docs
