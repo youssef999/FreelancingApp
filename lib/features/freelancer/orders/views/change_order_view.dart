@@ -81,7 +81,7 @@ class ChangeOrderView extends StatelessWidget {
 
                 CustomButton(text: 'updateData'.tr, onPressed: (){
 
-controller.changeOrderData(data['order_id']);
+controller.changeOrderData(data['id']);
 
                 }),
                 const SizedBox(height: 55,),

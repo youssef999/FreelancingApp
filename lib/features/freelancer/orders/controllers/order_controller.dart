@@ -30,7 +30,7 @@ getFreelancerOrders() async{
     orderList= [];
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('orders')
-        .where('client_email',isEqualTo: email)
+        .where('freelancer_email',isEqualTo: email)
         .get();
     try {
       List<Map<String, dynamic>> data = querySnapshot.docs
@@ -47,6 +47,7 @@ getFreelancerOrders() async{
       // ignore: avoid_print
       print("E.......");
     }
+    print("EMAIL=="+email);
     print("ORDER==="+orderList.toString());
     update();
   }

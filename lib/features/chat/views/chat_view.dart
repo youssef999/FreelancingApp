@@ -1,6 +1,6 @@
 
 
-// ignore_for_file: avoid_print, must_be_immutable
+// ignore_for_file: avoid_print, must_be_immutable, unused_local_variable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +36,7 @@ ChatController controller=Get.put(ChatController());
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.yellow[900],
+        backgroundColor: AppColors.primary,
         title: Row(
           children: [
             Image.asset('assets/images/chat.webp', height: 25),
@@ -86,7 +86,8 @@ ChatController controller=Get.put(ChatController());
                     onPressed: () {
 
                       controller.messageController.clear();
-                      controller.sendMessage();
+
+                      controller.sendMessage(widget.rec);
                       
                     },
                     child: Text(
@@ -116,35 +117,65 @@ class MessageStreamWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final box=GetStorage();
     String email=box.read('email') ?? 'x';
+    String roleId=box.read('roleId') ?? '1';
+    
+    String r='';
+    String e='';
+      if(roleId=='1'){
+       r=rec;
+       e=email; 
+       
+      }else{
+        r=email;
+        e=rec;
+      }
+    print("EMAILxx==$email");
+    print('reCXXXX==$rec');
+
     ChatController controller=Get.put(ChatController());
     return   StreamBuilder<QuerySnapshot>(
             stream:FirebaseFirestore.instance.
             collection('chat').where
-            ('sender',isEqualTo: email)
-            .where('rec',isEqualTo: rec)
+            ('sender',isEqualTo: e)
+            .where('rec',isEqualTo: r)
             .orderBy('time')
             .snapshots()
              , builder: (context, snapshot) {
+
               
+            
               List<MessageLine>messageWidgets=[];
 
               if(!snapshot.hasData){
              // 
               }
 
+
+
               final messages
               =snapshot.data!.docs.reversed;
               for(var message in messages){
                 final messageText=message.get('text');
                 final currentUser=controller.signedInUser.email;
-                final messageSender=
-              message.get('sender');
+                
+                String roleId=box.read('roleId');
+                String sender='';
+                // if(roleId=='1'){
+                //   sender=message.get('sender');
+                // }else{
+                //   sender=message.get('rec');
+                // }
+
+                final messageSender=message.get('sender');
+
               bool isMe=false;
 
-              if(currentUser==messageSender){
+              
+              if(email==messageSender){
                 isMe=true;
               }
-                final  messageWidget=MessageLine(sender: messageSender
+                final  messageWidget=MessageLine(
+                  sender: messageSender
                 , txt: messageText,isMe: isMe,
               
                 );

@@ -1,6 +1,6 @@
 
 
-// ignore_for_file: avoid_print, duplicate_ignore
+// ignore_for_file: avoid_print, duplicate_ignore, unused_local_variable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -16,8 +16,10 @@ final box=GetStorage();
 
 
   getFreelancerServices() async {
+
+    print("FREELNACER........XXX......");
     
-    String email=box.read('email');
+    String email=box.read('email')??'';
     freelancerServicesList = [];
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('services')

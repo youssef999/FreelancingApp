@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/features/freelancer/freelancer/views/freelancer_details_view.dart';
@@ -45,7 +47,7 @@ Get.to(FreelancerDetailsView(
 ));
                     }
                     else {
-                      
+                    
       Get.toNamed(Routes.SERVICEDETAILS,arguments:post );
                 
                     }

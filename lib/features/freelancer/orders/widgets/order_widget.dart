@@ -55,26 +55,26 @@ OrderCardWidget({super.key,required this.data,required this.controller});
                 SizedBox(
                   height: 200,
                   width: MediaQuery.of(context).size.width,
-                  child:Image.network(data['service_image'],
+                  child:Image.network(data['service_image']??"",
                     fit:BoxFit.fill,
                   ),
                 ),
                 const SizedBox(height: 7,),
-                Custom_Text(text: data['service_name'],
+                Custom_Text(text: data['service_name']??"",
                   color:AppColors.textColorDark,fontSize: 15,
                 fontWeight:FontWeight.w600,
                 ),
                 const SizedBox(height: 7,),
-                sampleCardData('from'.tr,data['user_name']),
+                sampleCardData('from'.tr,data['user_name']??""),
                 const SizedBox(height: 7,),
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Custom_Text(text: data['order_des'],
+                child: Custom_Text(text: data['order_des']??"",
                 color:AppColors.greyColor,fontSize:15,
                 ),
               ),
                 const SizedBox(height: 7,),
-                sampleCardData('date'.tr,data['date']),
+                sampleCardData('date'.tr,data['date']??""),
                 const SizedBox(height: 7,),
                 sampleCardData('taskTime'.tr,data['task_time']+ ' '+days),
                 const SizedBox(height: 7,),
@@ -92,7 +92,7 @@ OrderCardWidget({super.key,required this.data,required this.controller});
                       || data['order_status']!='accept'
                       )?
                     CustomButton(text: 'refuse'.tr, onPressed:(){
-                      controller.changeOrderStatus(data['order_id'],
+                      controller.changeOrderStatus(data['id'],
                       'refuse'
                       );
                     }):const SizedBox(),
@@ -102,9 +102,7 @@ OrderCardWidget({super.key,required this.data,required this.controller});
                     CustomButton(text: 'edit'.tr, onPressed:(){
 
                       Get.to(ChangeOrderView(data: data,
-        
                        ));
-
                     }
                     ),
                     //:const SizedBox(),
@@ -112,17 +110,15 @@ OrderCardWidget({super.key,required this.data,required this.controller});
                  (data['order_status']!='accept')?
                     CustomButton(text: 'accept'.tr, onPressed:(){
 
-                      controller.changeOrderStatus(data['order_id'],
+                      controller.changeOrderStatus(data['id'],
                           'accept'
                       );
+
                     }):const SizedBox(),
                   ],),
                 ),
                 const SizedBox(height: 20,),
-              
-
-              
-              
+            
                 //sampleCardData('des'.tr,data['order_des']),
               
               ]),

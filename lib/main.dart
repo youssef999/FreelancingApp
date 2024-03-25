@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/localization/local.dart';
@@ -12,7 +13,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
     final box=GetStorage();
      ///en //ar //' '
     Locale lang=const Locale('ar');

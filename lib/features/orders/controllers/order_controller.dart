@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: unused_local_variable, avoid_print, duplicate_ignore
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,7 +14,7 @@ List<Map<String,dynamic>> orderList=[];
 getUserOrders()async{
   print("aaa");
   final box=GetStorage();
-  String email=box.read('email'); 
+  String email=box.read('email')??''; 
  orderList=[];
 
 QuerySnapshot querySnapshot =

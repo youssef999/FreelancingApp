@@ -46,7 +46,7 @@ class AuthController extends GetxController {
  List<Map<String,dynamic>> freelancerDataList=[];
  final box=GetStorage();
 
-  getRoleIdByUser() async{
+getRoleIdByUser() async{
 userDataList=[];
 QuerySnapshot querySnapshot =
       await FirebaseFirestore.instance.collection
@@ -61,10 +61,7 @@ QuerySnapshot querySnapshot =
           box.write('roleId',roleId.text);
         }else{
    getRoleIdByFreelancer();
-        }
-
-
-     
+        }     
       }catch(e){
         // ignore: avoid_print
         print("E.......");
@@ -94,7 +91,7 @@ QuerySnapshot querySnapshot =
         }
         else{
           print("ELSE");
-          
+         
         }
 
 
@@ -234,6 +231,8 @@ QuerySnapshot querySnapshot =
   }
 
   userLogin() async {
+
+    print("LOGINNN");
     loading = true;
     update();
     final box = GetStorage();
@@ -247,14 +246,14 @@ QuerySnapshot querySnapshot =
           Get.offAllNamed(Routes.ROOT);
           print("val$value");
           loading = false;
-          box.write('email', emailController.text);          update();
-
+          box.write('email', emailController.text);         
+          update();
         });
       } catch (e) {
         loading = false;
         update();
         String error = '';
-        print(e);
+        print("E====$e");
         if (e.toString().contains('The password is invalid')) {
           error = 'wrongPass'.tr;
         } else if (e.toString().contains('There is no user record')) {

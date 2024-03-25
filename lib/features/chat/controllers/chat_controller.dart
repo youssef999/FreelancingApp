@@ -31,11 +31,30 @@ class ChatController extends GetxController{
     }
   }
 
-  sendMessage()async{
+
+  sendMessage(String rec)async{
+    final box=GetStorage();
+    String email=box.read('email') ?? '';
+
+     String roleId=box.read('roleId') ?? '1';
+    
+    String r='';
+    String e='';
+      if(roleId=='1'){
+       r=rec;
+       e=email; 
+       
+      }else{
+        r=email;
+        e=rec;
+      }
+  
+   
    await  FirebaseFirestore.instance.collection('chat').add({
       'text': messageText,
-      'sender': signedInUser.email,
+      'sender': e,
       'time': FieldValue.serverTimestamp(),
+      'rec':r,
       //'reciever':''
     });
   }
@@ -45,9 +64,20 @@ class ChatController extends GetxController{
     final box=GetStorage();
       // ignore: unused_local_variable
       String email=box.read('email');
+        String roleId=box.read('roleId');
+
+        String e='';
+        String r='';
+        if(roleId=='1'){
+          e=email;
+          r=rec;
+        }else{
+          e=rec;
+          r=email;
+        }
 
    final messages= await FirebaseFirestore.instance.collection('chat')
-   .where('sender',isEqualTo: email).where('rec',isEqualTo:rec)
+   .where('sender',isEqualTo: e).where('rec',isEqualTo:r)
    
    .orderBy('time')
    .get();
@@ -60,7 +90,8 @@ class ChatController extends GetxController{
 
 
   void messageStreams()async{
-    await for(var snapShot in FirebaseFirestore.instance.collection('chat').snapshots()){
+    await for(var snapShot in 
+    FirebaseFirestore.instance.collection('chat').snapshots()){
      for (var message in snapShot.docs){
       print(message.data());
      }
@@ -72,13 +103,25 @@ class ChatController extends GetxController{
 
 
   getAllUserChat()async{
+
+      
       final box=GetStorage();
+      String roleId=box.read('roleId');
+     String type='';
+      if(roleId=='1'){
+        type='sender';
+      }
+      else{
+        type='rec';
+      }
       // ignore: unused_local_variable
-      String email=box.read('email');
+      String email=box.read('email')??"freelancer2024@gmail.com";
+
+      print("EMAIL========="+email);
     userChatList= [];
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('chat')
-        .where('sender',isEqualTo:email)
+        .where(type,isEqualTo:email)
         .get();
     try {
       List<Map<String, dynamic>> data = querySnapshot.docs
@@ -105,17 +148,38 @@ class ChatController extends GetxController{
 
   }
 
-  filterReceiver()async{
 
-   for(int i=0;i<userChatList.length;i++){
+
+  filterReceiver()async{
+final box=GetStorage();
+String roleId=box.read('roleId');
+
+if(roleId=='1'){
+for(int i=0;i<userChatList.length;i++){
     if(recNames.contains(userChatList[i]['rec'])){
      print("CONTAINS");
     }else{
-   recNames.add( userChatList[i]['rec']);
+     
+ recNames.add( userChatList[i]['rec']);
+      
     }
      update();
 
    }
+}else{
+  for(int i=0;i<userChatList.length;i++){
+    if(recNames.contains(userChatList[i]['sender'])){
+     print("CONTAINS");
+    }else{
+     
+ recNames.add( userChatList[i]['sender']);
+      
+    }
+     update();
+
+   }
+}
+   
 
 
 

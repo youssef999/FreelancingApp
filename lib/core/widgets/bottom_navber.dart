@@ -24,14 +24,20 @@ buildBottomNavigationMenu(context, bottomNavBarController) {
         children: <Widget>[
           bottomItemWidget('assets/icon/home.svg', bottomNavBarController, 0,
               AppColors.transparent),
-          bottomItemWidget('assets/icon/deposit.svg', bottomNavBarController, 1,
+
+               bottomItemWidget('assets/icon/messagetext.svg',
+              bottomNavBarController, 1, AppColors.transparent),
+
+         
+          bottomItemWidget('assets/icon/torch.svg', bottomNavBarController, 2,
               AppColors.transparent),
-          bottomItemWidget('assets/icon/send.svg', bottomNavBarController, 2,
+          
+          bottomItemWidget('assets/icon/profile.svg', bottomNavBarController, 3,
               AppColors.whiteColor.withOpacity(0.1)),
-          bottomItemWidget('assets/icon/my_gift.svg', bottomNavBarController, 3,
-              AppColors.transparent),
-          bottomItemWidget('assets/icon/messagetext.svg',
-              bottomNavBarController, 4, AppColors.transparent),
+         
+          // bottomItemWidget('assets/icon/my_gift.svg', bottomNavBarController, 3,
+          //     AppColors.transparent),
+         
         ],
       ),
     ),

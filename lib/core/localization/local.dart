@@ -25,6 +25,9 @@ class MyLocal implements Translations{
           "addNewService":"اضف خدمة جديدة",
           "myOrders":"طلباتي ",
 
+          "serviceProviders":"مقدمي الخدمات ",
+
+
 
            "startFrom":"سعر الخدمة يبدا من : ",
 
@@ -62,12 +65,15 @@ class MyLocal implements Translations{
 
           "updateData":"تعديل البيانات ",
 
+           "freelancers":"عاملين عن بعد ",
+
            "buyService":" اشتري الخدمة ",
 
            "des":"   وصف الصفقة بالتفصيل", 
            "avgTime":"مدة التنفيذ المتوقعة ",
            "sendOffer":"ارسل الصفقة الان ",
 
+        
            "userName":"الاسم ",
 
            "services":"الخدمات",
@@ -111,6 +117,9 @@ class MyLocal implements Translations{
           "refuse":"Refuse",
           "accept":"Accept",
           "edit":'Edit',
+          "freelancers":"Remote Freelancers",
+
+          "serviceProviders":"Service providers",
 
            "startFrom":" Starts From : ",
 

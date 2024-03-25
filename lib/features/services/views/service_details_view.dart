@@ -117,7 +117,7 @@ class ServiceDetailsView extends GetView<ProductController> {
                             ),
                             IconButton(
                                 onPressed: () {
-                                 // Get.to(const ChatView());
+                                 Get.to(ChatView(rec:controller.posts!['freelancer_email']));
                                 },
                                 icon: const Icon(
                                   Icons.chat,
