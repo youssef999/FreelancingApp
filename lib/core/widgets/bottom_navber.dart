@@ -3,8 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
+import 'package:get_storage/get_storage.dart';
 
 buildBottomNavigationMenu(context, bottomNavBarController) {
+
+  final box=GetStorage();
+  String roleId=box.read('roleId')??'1';
   return BottomAppBar(
     elevation: 0,
     color: AppColors.transparent,
@@ -22,6 +26,7 @@ buildBottomNavigationMenu(context, bottomNavBarController) {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
+
           bottomItemWidget('assets/icon/home.svg', bottomNavBarController, 0,
               AppColors.transparent),
 
@@ -31,8 +36,9 @@ buildBottomNavigationMenu(context, bottomNavBarController) {
          
           bottomItemWidget('assets/icon/torch.svg', bottomNavBarController, 2,
               AppColors.transparent),
+
           
-          bottomItemWidget('assets/icon/profile.svg', bottomNavBarController, 3,
+          bottomItemWidget('assets/icon/profile.svg', bottomNavBarController, 4,
               AppColors.whiteColor.withOpacity(0.1)),
          
           // bottomItemWidget('assets/icon/my_gift.svg', bottomNavBarController, 3,

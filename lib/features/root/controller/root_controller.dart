@@ -16,6 +16,7 @@ import '../../chat/views/all_chats_view.dart';
 import '../../orders/views/myorder_view.dart';
 
 class RootController extends GetxController {
+
   RxInt selectedIndex = 0.obs;
 
 String roleId='';
@@ -33,18 +34,19 @@ String roleId='';
   void onInit() {
     super.onInit();
      final box=GetStorage();
-  String roleId =  box.read('roleId');
+  String roleId =  box.read('roleId')??'1';
   if(roleId=='1'){
     page=[
-        HomeView(),
+     HomeView(),
      const AllChatsView(),
      const MyOrderView(),
      const ProfileView(),
     ];
   }else{
     page=[
-        HomeView(),
+     HomeView(),
      const AllChatsView(),
+    //  const AddServicesView(),
      const OrderRequestView(),
      const ProfileView(),
     ];

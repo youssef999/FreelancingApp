@@ -1,7 +1,4 @@
-
-
 // ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:freelancerApp/core/const/constant.dart';
 import 'package:freelancerApp/core/resources/app_colors.dart';
@@ -12,7 +9,7 @@ import 'package:get/get.dart';
 
 class MyOrderView extends StatefulWidget {
   const MyOrderView({super.key});
-
+  
   @override
   State<MyOrderView> createState() => _MyOrderViewState();
 }
@@ -23,6 +20,7 @@ UserOrderController controller=Get.put(UserOrderController());
 
   @override
   void initState() {
+    print("HERE");
     controller.getUserOrders();
     super.initState();
   }
@@ -33,9 +31,9 @@ UserOrderController controller=Get.put(UserOrderController());
       backgroundColor: AppColors.mainly,
       appBar:CustomAppBar('', context, false),
       body:Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: ListView(children:[
-          const SizedBox(height: 20,),
+          const SizedBox(height: 11),
           GetBuilder<UserOrderController>(
             init: UserOrderController(),
             builder: (_) {
@@ -57,6 +55,7 @@ Widget UserOrderWidget(){
  String status='';
   return ListView.builder(
     shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
     itemCount: controller.orderList.length,
     itemBuilder: (context, index) {
 
@@ -76,7 +75,7 @@ Widget UserOrderWidget(){
 
 
     return Padding(
-      padding: const EdgeInsets.only(left:20.0,right: 20),
+      padding: const EdgeInsets.only(top:8,left:6.0,right: 6),
       child: Container(
         decoration:BoxDecoration(
           borderRadius:BorderRadius.circular(12),

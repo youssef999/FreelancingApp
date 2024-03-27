@@ -17,6 +17,7 @@ void main() async {
      ///en //ar //' '
     Locale lang=const Locale('ar');
     String langx=box.read('locale')??'x';
+
     if(langx!='x'){
       lang=Locale(langx);
     }
@@ -25,6 +26,7 @@ void main() async {
       lang=const Locale('ar');
       box.write('locale','ar');
     }
+
   runApp(
     GetMaterialApp(
       translations: MyLocal(),
@@ -36,4 +38,5 @@ void main() async {
       defaultTransition: Transition.cupertino,
     ),
   );
+
 }

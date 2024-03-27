@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:freelancerApp/features/root/view/root_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/const/app_message.dart';
 
@@ -64,11 +65,15 @@ final box=GetStorage();
  
  final box=GetStorage();
 
- String email=box.read('email');
+ String email=box.read('email')??'';
 
-const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)*&1!';
+ const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)*&1!';
   Random random = Random();
   String result = '';
+ DateTime now = DateTime.now();
+
+ String formattedDate = DateFormat('dd-MM-yyyy').format(now);
+
   for (int i = 0; i < 12; i++) {
     result += chars[random.nextInt(chars.length)];
   }
@@ -77,9 +82,9 @@ const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
    .set({
   
   'service_name':data['name'].toString(),
-  
-  'date':DateTime.now().toString(),
-  
+
+  'date':formattedDate,
+  //DateTime.now().toString()
   "freelancer_email":data['freelancer_email'],
   
   'freelancer_name':data['freelancer_name'],
@@ -102,8 +107,7 @@ const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
   'id':result,
 
-  'status':'pending',
-
+  'order_status':'pending',
 
     }).then((value) {
      isLoading=true;

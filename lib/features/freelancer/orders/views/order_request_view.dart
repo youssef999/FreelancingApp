@@ -22,7 +22,6 @@ class OrderRequestView extends GetView<OrderController> {
           body:ListView(children:  [
             const SizedBox(height: 11,),
             OrderWidgetFromFirebase(controller: controller),
-        
           ]
           ),
         );

@@ -33,12 +33,12 @@ class _CheckOutViewState extends State<CheckOutView> {
    controller.getUserName();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
 
-   
-
-    return Scaffold(
+    return
+      Scaffold(
       appBar:CustomAppBar('', context, false),
       body:Padding(
         padding: const EdgeInsets.all(8.0),
@@ -113,5 +113,6 @@ class _CheckOutViewState extends State<CheckOutView> {
         ]),
       ),
     );
+
   }
 }

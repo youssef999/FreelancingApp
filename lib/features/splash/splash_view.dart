@@ -21,9 +21,9 @@ class _SplashViewState extends State<SplashView> {
     String email = box.read('email') ?? 'x';
     Future.delayed(const Duration(seconds: 3)).then((value) {
       if (email == 'x') {
-        Get.toNamed(Routes.ROOT);
+        Get.offNamed(Routes.ROOT);
       } else {
-        Get.toNamed(Routes.ROOT);
+        Get.offNamed(Routes.ROOT);
       }
     });
     super.initState();
